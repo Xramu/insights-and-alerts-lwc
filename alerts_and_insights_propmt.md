@@ -1,6 +1,6 @@
 ## Task Description
 
-Create a Insights and Alerts Lightning Web Component called `InsightsAndAlertsWindow` following the description inside this prompt.
+Create an Insights and Alerts Lightning Web Component called `InsightsAndAlertsWindow` following the description inside this prompt.
 
 The code should follow standard Salesforce styling and development best practices and be deployable to scratch org or sandbox.
 
@@ -10,14 +10,14 @@ Keep it fun and readable.
 
 Object:
 - Use the custom object `Insight_and_Alert__c` to read the needed records.
-- Writing the `Completed__c` checkbox field is able to be written to.
+- The `Completed__c` checkbox field is possible to be written to.
 
 Fields inside `Insight_and_Alert__c`:
 - `Completed__c`: Checkbox status of this insight being completed or not.
 - `Context__c`: Picklist field classifying this insight's context type.
 - `Details__c`: Rich text area containing this insight's in-depth details.
 - `Open_Record__c`: URL of the record that this insight is created of.
-- `Rationale__c`: Shorter details of the insight and it's context.
+- `Rationale__c`: Shorter details of the insight and its context.
 - `Suggested_Action__c`: Name of the action that is suggested for this insight.
 - `Topic__c`: Title of the insight.
 
@@ -100,7 +100,7 @@ Multiple sections can be expanded at the same time.
 
 #### Insight Detail Section
 
-The `InsightDetailSection` should be its own component seperate from the main `InsightsAndAlertsWindow` component and gets created dynamically inside the Insights List for each filtered insight record.
+The `InsightDetailSection` should be its own component separate from the main `InsightsAndAlertsWindow` component and gets created dynamically inside the Insights List for each filtered insight record.
 
 The Insight Details Section has a reference to a single `Insight_and_Alert__c` record that it will display.
 
@@ -121,7 +121,7 @@ When the `View Record Button` is pressed, the URL inside the `Open_Record__c` fi
 
 If `Open_Record__c` field is empty, the `View Record Button` will not be rendered at all.
 
-The expandable section for showing `Details__c` will collapse if the record that it belongs to it gets collapsed.
+The expandable section for showing `Details__c` will collapse if the record that it belongs to gets collapsed.
 
 ## User Interface Requirements
 
@@ -129,6 +129,6 @@ The user can press the checkmark on each expandable section to toggle the comple
 
 ## Extra Specifications
 
-- The title label, badge, rationale description and completed checkbox is always shown in the same way no matter if the insight section is collapsed or not. The addittional expanded information is just expanded underneath them.
+- The title label, badge, rationale description and completed checkbox is always shown in the same way no matter if the insight section is collapsed or not. The additional expanded information is just expanded underneath them.
 - Keep the project modular and easy to read.
 - Create the filtering system in a easy to expand style.
