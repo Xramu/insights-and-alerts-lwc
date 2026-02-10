@@ -1,6 +1,15 @@
+:host {
+  --detail-background-color: #f3f3f3;
+}
+
 /* Detail section styles */
 .detail-container {
-  background: #ffffff;
+  background: var(--detail-background-color);
+  padding: 1rem;
+}
+
+.detail-expander {
+  background-color: var(--detail-background-color);
 }
 
 .slds-section__title .slds-button.slds-section__title-action {
@@ -13,7 +22,7 @@
 }
 
 .chev.rotate {
-  transform: rotate(180deg);
+  transform: rotate(-180deg);
 }
 
 .rich-content {

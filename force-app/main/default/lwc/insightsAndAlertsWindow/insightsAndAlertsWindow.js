@@ -92,6 +92,7 @@ export default class InsightsAndAlertsWindow extends LightningElement {
     if (this.selectedFilter === 'All') {
       return this.insights;
     }
+    
     return this.insights.filter((i) => i.context === this.selectedFilter);
   }
 

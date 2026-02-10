@@ -24,29 +24,10 @@ export default class InsightDetailSection extends LightningElement {
     this.detailsExpandedInternal = this.expanded;
   }
 
-  renderedCallback() {
-    // Render rich text safely into the container
-    const container = this.template.querySelector('.rich-content');
-    if (container) {
-      // Replace content if changed
-      if (container.innerHTML !== (this.details || '')) {
-        // Note: RTA content comes from org and WITH SECURITY_ENFORCED is applied server-side.
-        // LWC sanitizes dangerous markup when rendering. Avoid script execution.
-        // eslint-disable-next-line @lwc/lwc/no-inner-html
-        container.innerHTML = this.details || '';
-      }
-    }
-  }
-
   // Exposed getter for template to determine expanded state
   get detailsExpanded() {
     // If parent is not expanded, force details hidden
-    return this.expanded && this.detailsExpandedInternal;
-  }
-
-  // Section class and chevron class
-  get detailsSectionClass() {
-    return this.detailsExpanded ? 'slds-section__content' : 'slds-section__content slds-hide';
+    return this.detailsExpandedInternal;
   }
 
   get chevronClass() {
@@ -63,27 +44,17 @@ export default class InsightDetailSection extends LightningElement {
   }
 
   get viewButtonLabel() {
-    // Context-driven label per spec
-    switch (this.context) {
-      case 'Lead':
-        return 'View Lead';
-      case 'Account':
-        return 'View Account';
-      case 'Opportunity':
-        return 'View Opportunity';
-      case 'Potential':
-      case 'To-Do':
-      default:
-        return 'View Record';
+    const contextLookup = {
+      'Lead': 'View Lead',
+      'Account': 'View Account',
+      'Opportunity': 'View Opportunity'
     }
+
+    return contextLookup[this.context] || 'View Record';
   }
 
   // Events / handlers
   toggleDetails = () => {
-    if (!this.expanded) {
-      // Parent not expanded => keep hidden
-      return;
-    }
     this.detailsExpandedInternal = !this.detailsExpandedInternal;
     // Fire a simple event for parent wiring (no payload needed)
     this.dispatchEvent(new CustomEvent('collapse'));

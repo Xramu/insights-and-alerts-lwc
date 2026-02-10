@@ -6,12 +6,12 @@
   Project rules: no inline expressions/concatenation/function calls in template.
 -->
 <template>
-  <div class="detail-container slds-card__body_inner">
+  <div class="slds-card__body_inner">
     <!-- Details collapsible -->
     <div class="slds-section slds-m-bottom_small">
       <h3 class="slds-section__title">
         <button
-          class="slds-button slds-section__title-action"
+          class="slds-button slds-section__title-action slds-card detail-expander"
           aria-controls="details-content"
           aria-expanded={detailsExpanded}
           onclick={toggleDetails}
@@ -20,9 +20,11 @@
           <span class="slds-truncate slds-p-left_x-small" title="Details">Details</span>
         </button>
       </h3>
-      <div id="details-content" class={detailsSectionClass} role="region">
-        <div class="slds-p-around_small rich-content" lwc:dom="manual"></div>
-      </div>
+      <template if:true={detailsExpanded}>
+          <div class="slds-card detail-container">
+            <lightning-formatted-rich-text value={details}></lightning-formatted-rich-text>
+          </div>
+        </template>
     </div>
 
     <!-- Actions row -->
