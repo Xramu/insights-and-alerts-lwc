@@ -65,9 +65,9 @@ In the beginning of the button row there is also an extra button labeled `All` t
 Each button's label is as follows:
 - All: `All`
 - Potential: `Potentials`
-- Lead: `Lead`
-- Account: `Account`
-- Opportunity: `Opportunity`
+- Lead: `Leads`
+- Account: `Accounts`
+- Opportunity: `Opportunities`
 - To-Do: `To-Do`
 
 The filter buttons are grey when not selected. When a button is clicked and that filter is used, the button is colored in their related color defined above in the `Related Colors` section.
