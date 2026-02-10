@@ -1,3 +1,16 @@
+:host {
+  --potential-color: #b4d1de;
+  --lead-color: #1894c9;
+  --account-color: #97c39b;
+  --opportunity-color: #c9b4de;
+  --todo-color: #efe183;
+
+  --button-border-color: #16325c;
+  
+  --all-color: #9e9e9e;
+  --all-border-color: white;
+}
+
 /* SLDS-friendly tweaks and component-scoped styles */
 .slds-card {
   border: 1px solid #dddbda;
@@ -35,39 +48,39 @@
 
 /* Context badge colors */
 .badge-potential {
-  background: #b4d1de;
-  color: #16325c;
+  background: var(--potential-color);
+  color: var(--button-border-color);
 }
 
 .badge-lead {
-  background: #1894c9;
-  color: #16325c;
+  background: var(--lead-color);
+  color: var(--button-border-color);
 }
 
 .badge-account {
-  background: #97c39b;
-  color: #16325c;
+  background: var(--account-color);
+  color: var(--button-border-color);
 }
 
 .badge-opportunity {
-  background: #c9b4de;
-  color: #16325c;
+  background: var(--opportunity-color);
+  color: var(--button-border-color);
 }
 
 .badge-todo {
-  background: #efe183;
-  color: #16325c;
+  background: var(--todo-color);
+  color: var(--button-border-color);
 }
 
 .badge-all-selected {
-  background: #9e9e9e;
-  color: white;
+  background: var(--all-color);
+  color: var(--all-border-color);
 }
 
 /* Button styles */
 .btn-all-selected {
-  background: #9e9e9e;
-  color: white;
+  background: var(--all-color);
+  color: var(--all-border-color);
 }
 
 /* Custom button styles */
@@ -102,58 +115,58 @@
 
 /* Context-specific button colors */
 .custom-button.potential {
-  background-color: #b4d1de;
-  color: #16325c;
+  background-color: var(--potential-color);
+  color: var(--button-border-color);
 }
 
 .custom-button.lead {
-  background-color: #1894c9;
-  color: #16325c;
+  background-color: var(--lead-color);
+  color: var(--button-border-color);
 }
 
 .custom-button.account {
-  background-color: #97c39b;
-  color: #16325c;
+  background-color: var(--account-color);
+  color: var(--button-border-color);
 }
 
 .custom-button.opportunity {
-  background-color: #c9b4de;
-  color: #16325c;
+  background-color: var(--opportunity-color);
+  color: var(--button-border-color);
 }
 
 .custom-button.todo {
-  background-color: #efe183;
-  color: #16325c;
+  background-color: var(--todo-color);
+  color: var(--button-border-color);
 }
 
 /* Selected button styles */
 .custom-button.selected {
-  background-color: #9e9e9e;
-  color: white;
+  background-color: var(--all-color);
+  color: var(--all-border-color);
 }
 
 /* Ensure selected context buttons maintain their color when selected */
 .custom-button.selected.potential {
-  background-color: #b4d1de;
-  color: #16325c;
+  background-color: var(--potential-color);
+  color: var(--button-border-color);
 }
 
 .custom-button.selected.lead {
-  background-color: #1894c9;
-  color: #16325c;
+  background-color: var(--lead-color);
+  color: var(--button-border-color);
 }
 
 .custom-button.selected.account {
-  background-color: #97c39b;
-  color: #16325c;
+  background-color: var(--account-color);
+  color: var(--button-border-color);
 }
 
 .custom-button.selected.opportunity {
-  background-color: #c9b4de;
-  color: #16325c;
+  background-color: var(--opportunity-color);
+  color: var(--button-border-color);
 }
 
 .custom-button.selected.todo {
-  background-color: #efe183;
-  color: #16325c;
+  background-color: var(--todo-color);
+  color: var(--button-border-color);
 }

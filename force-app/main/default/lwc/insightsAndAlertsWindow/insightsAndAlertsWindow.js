@@ -65,7 +65,7 @@ export default class InsightsAndAlertsWindow extends LightningElement {
         // Pre-computed properties for template use
         badgeClass: this.getBadgeClass(r.Id),
         badgeSelectedClass: this.getBadgeSelectedClass(),
-        badgeFullClass: `slds-badge slds-m-right_small ${this.getBadgeClass(r.Id)} ${this.getBadgeSelectedClass()}`,
+        badgeFullClass: `slds-badge slds-m-right_small ${this.getBadgeClass(r.Context__c)}`,
         badgeLabel: this.getBadgeLabel(r.Id),
         isExpanded: !!this.expandedMap.get(r.Id),
         isDetailsExpanded: !!this.expandedMap.get(r.Id)
@@ -146,18 +146,16 @@ export default class InsightsAndAlertsWindow extends LightningElement {
     return color ? `background:${color};color:#16325c` : '';
   }
 
-  // Compute per-record class names without inline expressions
-  getBadgeClass(insightId) {
-    const rec = this.insights.find((i) => i.id === insightId);
-    const ctx = rec ? rec.context : '';
-    switch (ctx) {
-      case 'Potential': return 'badge-potential';
-      case 'Lead': return 'badge-lead';
-      case 'Account': return 'badge-account';
-      case 'Opportunity': return 'badge-opportunity';
-      case 'To-Do': return 'badge-todo';
-      default: return '';
+  getBadgeClass(context) {
+    const classLookup = {
+      'Potential': 'badge-potential',
+      'Lead': 'badge-lead',
+      'Account': 'badge-account',
+      'Opportunity': 'badge-opportunity',
+      'To-Do':'badge-todo'
     }
+
+    return classLookup[context] || '';
   }
 
   // Computed button classes/styles (no inline concatenation in template)
@@ -216,11 +214,6 @@ export default class InsightsAndAlertsWindow extends LightningElement {
     const rec = this.insights.find((i) => i.id === insightId);
     const ctx = rec ? rec.context : '';
     return this.contextBadgeLabelMap[ctx] || '';
-  }
-
-  // Get the full class string for badge to avoid concatenation in template
-  getBadgeFullClass(insightId) {
-    return `slds-badge slds-m-right_small ${this.getBadgeClass(insightId)} ${this.getBadgeSelectedClass()}`;
   }
 
   // Expand/collapse
