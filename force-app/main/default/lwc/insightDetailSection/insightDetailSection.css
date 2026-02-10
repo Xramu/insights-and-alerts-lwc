@@ -1,0 +1,22 @@
+/* Detail section styles */
+.detail-container {
+  background: #ffffff;
+}
+
+.slds-section__title .slds-button.slds-section__title-action {
+  width: 100%;
+  text-align: left;
+}
+
+.chev {
+  transition: transform 0.2s ease-in-out;
+}
+
+.chev.rotate {
+  transform: rotate(180deg);
+}
+
+.rich-content {
+  /* allow rich text to wrap nicely */
+  word-wrap: break-word;
+}

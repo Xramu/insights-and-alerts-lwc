@@ -1,0 +1,48 @@
+<!--
+  Insight Detail Section
+  - Receives a single insight record via @api props
+  - Collapsible "Details" section (label: Details), collapsed by default and follows parent collapse
+  - Two buttons row: Suggested Action (label from record), conditional View Record button (label varies by context)
+  Project rules: no inline expressions/concatenation/function calls in template.
+-->
+<template>
+  <div class="detail-container slds-card__body_inner">
+    <!-- Details collapsible -->
+    <div class="slds-section slds-m-bottom_small">
+      <h3 class="slds-section__title">
+        <button
+          class="slds-button slds-section__title-action"
+          aria-controls="details-content"
+          aria-expanded={detailsExpanded}
+          onclick={toggleDetails}
+        >
+          <lightning-icon icon-name="utility:chevrondown" size="x-small" class={chevronClass}></lightning-icon>
+          <span class="slds-truncate slds-p-left_x-small" title="Details">Details</span>
+        </button>
+      </h3>
+      <div id="details-content" class={detailsSectionClass} role="region">
+        <div class="slds-p-around_small rich-content" lwc:dom="manual"></div>
+      </div>
+    </div>
+
+    <!-- Actions row -->
+    <div class="slds-grid slds-gutters_x-small">
+      <div class="slds-col">
+        <lightning-button
+          variant="brand"
+          label={suggestedActionLabel}
+          onclick={handleSuggestedAction}
+        ></lightning-button>
+      </div>
+      <template if:true={showViewButton}>
+        <div class="slds-col">
+          <lightning-button
+            variant="neutral"
+            label={viewButtonLabel}
+            onclick={handleViewRecord}
+          ></lightning-button>
+        </div>
+      </template>
+    </div>
+  </div>
+</template>

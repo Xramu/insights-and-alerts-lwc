@@ -1,0 +1,133 @@
+<!--
+  InsightsAndAlertsWindow
+  - Title row with refresh
+  - Description row
+  - Context filter row (All, Potential, Lead, Account, Opportunity, To-Do)
+  - Insights list with expandable sections
+  Project rules: no inline expressions/concatenation/function calls in template attributes or text nodes.
+-->
+<template>
+  <div class="slds-card">
+    <!-- Title Row -->
+    <div class="slds-card__header slds-grid slds-grid_align-spread slds-p-around_small">
+      <header class="slds-media slds-media_center slds-has-flexi-truncate">
+        <div class="slds-media__figure">
+          <span class="slds-icon_container slds-icon-standard-feedback" title="Intelligent Alerts">
+            <svg class="slds-icon slds-icon_small slds-icon-text-default" aria-hidden="true">
+              <use xlink:href="/_slds/icons/standard-sprite/svg/symbols.svg#feedback"></use>
+            </svg>
+          </span>
+        </div>
+        <div class="slds-media__body">
+          <h2 class="slds-card__header-title slds-truncate" title="Intelligent Alerts">
+            Intelligent Alerts
+          </h2>
+        </div>
+      </header>
+      <div class="slds-no-flex">
+        <lightning-button-icon
+          icon-name="utility:refresh"
+          alternative-text="Refresh"
+          variant="border-filled"
+          onclick={handleRefresh}
+        >
+        </lightning-button-icon>
+      </div>
+    </div>
+
+    <!-- Description Row -->
+    <div class="slds-p-horizontal_small slds-p-bottom_small slds-text-body_small slds-text-color_weak">
+      Today's Priorities & Insights
+    </div>
+
+    <!-- Context Filter Row -->
+    <div class="slds-p-horizontal_small slds-p-bottom_small">
+      <div class="slds-button-group" role="group">
+        <lightning-button
+          label="All"
+          onclick={handleFilterAll}
+          class={allButtonClass}
+        ></lightning-button>
+        <lightning-button
+          label="Potentials"
+          onclick={handleFilterPotential}
+          class={potentialButtonClass}
+        ></lightning-button>
+        <lightning-button
+          label="Leads"
+          onclick={handleFilterLead}
+          class={leadButtonClass}
+        ></lightning-button>
+        <lightning-button
+          label="Accounts"
+          onclick={handleFilterAccount}
+          class={accountButtonClass}
+        ></lightning-button>
+        <lightning-button
+          label="Opportunities"
+          onclick={handleFilterOpportunity}
+          class={opportunityButtonClass}
+        ></lightning-button>
+        <lightning-button
+          label="To-Do"
+          onclick={handleFilterTodo}
+          class={todoButtonClass}
+        ></lightning-button>
+      </div>
+    </div>
+
+    <!-- Insights List -->
+    <div class="slds-p-around_small">
+      <template if:true={hasData}>
+        <template for:each={filteredInsights} for:item="ins">
+          <section key={ins.id} class="insight-section slds-m-bottom_small">
+            <!-- Collapsed header area (always visible) -->
+            <div class="slds-grid slds-grid_align-spread slds-p-around_small section-header" data-id={ins.id} onclick={toggleExpand}>
+              <div class="slds-col slds-truncate">
+                <div class="slds-text-heading_small slds-truncate" title={ins.topic}>
+                  {ins.topic}
+                </div>
+                <div class="slds-text-body_small slds-text-color_weak slds-m-top_xx-small rationale">
+                  {ins.rationale}
+                </div>
+              </div>
+              <div class="slds-col slds-grid slds-grid_vertical-align-center slds-grid_align-end slds-gutters_x-small right-controls">
+                <!-- Context Badge -->
+                <span class="slds-badge slds-m-right_small {getBadgeClass(ins.id)} {getBadgeSelectedClass()}">{getBadgeLabel(ins.id)}</span>
+                <!-- Completed Checkbox -->
+                <lightning-input
+                  type="checkbox"
+                  checked={ins.completed}
+                  data-id={ins.id}
+                  message-when-bad-input="Unable to update"
+                  onchange={handleCompletedToggle}
+                ></lightning-input>
+              </div>
+            </div>
+
+            <!-- Expanded area -->
+            <template if:true={expandedMapValue(ins.id)}>
+              <div class="slds-p-horizontal_small slds-p-bottom_small">
+                <c-insight-detail-section
+                  record-id={ins.id}
+                  topic={ins.topic}
+                  context={ins.context}
+                  details={ins.details}
+                  suggested-action={ins.suggestedAction}
+                  open-record-url={ins.openRecordUrl}
+                  collapsed={getDetailsCollapsedById(ins.id)}
+                  oncollapse={handleChildCollapse}
+                ></c-insight-detail-section>
+              </div>
+            </template>
+          </section>
+        </template>
+      </template>
+      <template if:false={hasData}>
+        <div class="slds-text-align_center slds-p-vertical_large slds-text-color_weak">
+          No insights to display.
+        </div>
+      </template>
+    </div>
+  </div>
+</template>
