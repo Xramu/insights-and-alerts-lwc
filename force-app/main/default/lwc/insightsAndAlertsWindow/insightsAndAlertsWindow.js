@@ -43,6 +43,7 @@ export default class InsightsAndAlertsWindow extends LightningElement {
   };
 
   connectedCallback() {
+    console.log('Refreshed');
     this.loadData();
   }
 
@@ -51,7 +52,7 @@ export default class InsightsAndAlertsWindow extends LightningElement {
     this.errorMessage = '';
     try {
       const records = await getAllInsights();
-      // Map to UI-friendly shape with safe defaults
+      // Map to UI-friendly shape with safe defaults and pre-computed properties
       this.insights = (records || []).map((r) => ({
         id: r.Id,
         topic: r.Topic__c || '',
@@ -59,8 +60,15 @@ export default class InsightsAndAlertsWindow extends LightningElement {
         rationale: r.Rationale__c || '',
         details: r.Details__c || '',
         openRecordUrl: r.Open_Record__c || '',
-        completed: r.Completed__c === true,
-        suggestedAction: r.Suggested_Action__c || ''
+        completed: !!r.Completed__c,
+        suggestedAction: r.Suggested_Action__c || '',
+        // Pre-computed properties for template use
+        badgeClass: this.getBadgeClass(r.Id),
+        badgeSelectedClass: this.getBadgeSelectedClass(),
+        badgeFullClass: `slds-badge slds-m-right_small ${this.getBadgeClass(r.Id)} ${this.getBadgeSelectedClass()}`,
+        badgeLabel: this.getBadgeLabel(r.Id),
+        isExpanded: !!this.expandedMap.get(r.Id),
+        isDetailsExpanded: !!this.expandedMap.get(r.Id)
       }));
       // preserve expansion where possible
       const newExpanded = new Map();
@@ -139,8 +147,8 @@ export default class InsightsAndAlertsWindow extends LightningElement {
   }
 
   // Compute per-record class names without inline expressions
-  getBadgeClass(id) {
-    const rec = this.insights.find((i) => i.id === id);
+  getBadgeClass(insightId) {
+    const rec = this.insights.find((i) => i.id === insightId);
     const ctx = rec ? rec.context : '';
     switch (ctx) {
       case 'Potential': return 'badge-potential';
@@ -194,30 +202,35 @@ export default class InsightsAndAlertsWindow extends LightningElement {
   }
 
   // Helper to get badge label (used in template)
-  getBadgeLabel(id) {
-    const rec = this.insights.find((i) => i.id === id);
+  getBadgeLabel(insightId) {
+    const rec = this.insights.find((i) => i.id === insightId);
     const ctx = rec ? rec.context : '';
     return this.contextBadgeLabelMap[ctx] || '';
+  }
+
+  // Get the full class string for badge to avoid concatenation in template
+  getBadgeFullClass(insightId) {
+    return `slds-badge slds-m-right_small ${this.getBadgeClass(insightId)} ${this.getBadgeSelectedClass()}`;
   }
 
   // Expand/collapse
   toggleExpand = (event) => {
     const id = event.currentTarget?.dataset?.id;
+    
     if (!id) return;
-    const isOpen = this.expandedMap.get(id) === true;
-    const next = new Map(this.expandedMap);
-    next.set(id, !isOpen);
-    this.expandedMap = next;
+
+    this.insights = this.insights.map((insight) => {
+      // Update map and insight object only if the ID was found
+      if (insight.id === id) {
+        const newState = !insight.isExpanded;
+        this.expandedMap.set(id, newState);
+
+        return { ...insight, isExpanded: newState };
+      }
+      
+      return insight;
+    })
   };
-
-  expandedMapValue(id) {
-    return this.expandedMap.get(id) === true;
-  }
-
-  getDetailsCollapsedById(id) {
-    // child detail section collapsible "Details" should follow parent; collapsed when parent collapsed
-    return !this.expandedMapValue(id);
-  }
 
   // Completed toggle
   async handleCompletedToggle(event) {

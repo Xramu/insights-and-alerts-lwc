@@ -93,7 +93,7 @@
               </div>
               <div class="slds-col slds-grid slds-grid_vertical-align-center slds-grid_align-end slds-gutters_x-small right-controls">
                 <!-- Context Badge -->
-                <span class="slds-badge slds-m-right_small {getBadgeClass(ins.id)} {getBadgeSelectedClass()}">{getBadgeLabel(ins.id)}</span>
+                <span class={ins.badgeFullClass}>{ins.badgeLabel}</span>
                 <!-- Completed Checkbox -->
                 <lightning-input
                   type="checkbox"
@@ -106,7 +106,7 @@
             </div>
 
             <!-- Expanded area -->
-            <template if:true={expandedMapValue(ins.id)}>
+            <template if:true={ins.isExpanded}>
               <div class="slds-p-horizontal_small slds-p-bottom_small">
                 <c-insight-detail-section
                   record-id={ins.id}
@@ -115,7 +115,7 @@
                   details={ins.details}
                   suggested-action={ins.suggestedAction}
                   open-record-url={ins.openRecordUrl}
-                  collapsed={getDetailsCollapsedById(ins.id)}
+                  expanded={ins.isDetailsExpanded}
                   oncollapse={handleChildCollapse}
                 ></c-insight-detail-section>
               </div>

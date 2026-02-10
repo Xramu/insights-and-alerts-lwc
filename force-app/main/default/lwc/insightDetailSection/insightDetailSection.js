@@ -4,7 +4,7 @@ import { LightningElement, api } from 'lwc';
  * InsightDetailSection
  * - Displays Details__c (rich text) in a collapsible section
  * - Two buttons: Suggested Action (label from record), and conditional View Record button
- * - Follows parent collapse via @api collapsed
+ * - Follows parent expand via @api expanded
  *
  * Template rules: no inline expressions/concatenation/function calls in template.
  */
@@ -15,13 +15,13 @@ export default class InsightDetailSection extends LightningElement {
   @api details = '';
   @api suggestedAction = '';
   @api openRecordUrl = '';
-  @api collapsed = true;
+  @api expanded = false;
 
   detailsExpandedInternal = false;
 
   connectedCallback() {
-    // Keep details collapsed by default and sync with parent collapsed state
-    this.detailsExpandedInternal = !this.collapsed && false;
+    // Keep details expanded by default and sync with parent expanded state
+    this.detailsExpandedInternal = this.expanded;
   }
 
   renderedCallback() {
@@ -40,8 +40,8 @@ export default class InsightDetailSection extends LightningElement {
 
   // Exposed getter for template to determine expanded state
   get detailsExpanded() {
-    // If parent is collapsed, force details hidden
-    return !this.collapsed && this.detailsExpandedInternal;
+    // If parent is not expanded, force details hidden
+    return this.expanded && this.detailsExpandedInternal;
   }
 
   // Section class and chevron class
@@ -80,8 +80,8 @@ export default class InsightDetailSection extends LightningElement {
 
   // Events / handlers
   toggleDetails = () => {
-    if (this.collapsed) {
-      // Parent collapsed => keep hidden
+    if (!this.expanded) {
+      // Parent not expanded => keep hidden
       return;
     }
     this.detailsExpandedInternal = !this.detailsExpandedInternal;
