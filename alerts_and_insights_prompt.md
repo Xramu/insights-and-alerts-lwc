@@ -132,3 +132,4 @@ The user can press the checkmark on each expandable section to toggle the comple
 - The title label, badge, rationale description and completed checkbox is always shown in the same way no matter if the insight section is collapsed or not. The additional expanded information is just expanded underneath them.
 - Keep the project modular and easy to read.
 - Create the filtering system in a easy to expand style.
+- Just create a deployable exposed lightning web component, do not create any kind of page for it.
