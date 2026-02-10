@@ -69,3 +69,91 @@
   background: #9e9e9e;
   color: white;
 }
+
+/* Custom button styles */
+.custom-button {
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  margin-right: 0.25rem;
+  background-color: #f3f2f2;
+  color: #000;
+  cursor: pointer;
+  font-weight: 400;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  transition: background-color 0.2s ease;
+}
+
+.custom-button:hover {
+  opacity: 0.8;
+}
+
+.custom-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #0070d2;
+}
+
+.custom-button:active {
+  transform: translateY(1px);
+}
+
+/* Context-specific button colors */
+.custom-button.potential {
+  background-color: #b4d1de;
+  color: #16325c;
+}
+
+.custom-button.lead {
+  background-color: #1894c9;
+  color: #16325c;
+}
+
+.custom-button.account {
+  background-color: #97c39b;
+  color: #16325c;
+}
+
+.custom-button.opportunity {
+  background-color: #c9b4de;
+  color: #16325c;
+}
+
+.custom-button.todo {
+  background-color: #efe183;
+  color: #16325c;
+}
+
+/* Selected button styles */
+.custom-button.selected {
+  background-color: #9e9e9e;
+  color: white;
+}
+
+/* Ensure selected context buttons maintain their color when selected */
+.custom-button.selected.potential {
+  background-color: #b4d1de;
+  color: #16325c;
+}
+
+.custom-button.selected.lead {
+  background-color: #1894c9;
+  color: #16325c;
+}
+
+.custom-button.selected.account {
+  background-color: #97c39b;
+  color: #16325c;
+}
+
+.custom-button.selected.opportunity {
+  background-color: #c9b4de;
+  color: #16325c;
+}
+
+.custom-button.selected.todo {
+  background-color: #efe183;
+  color: #16325c;
+}

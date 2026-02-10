@@ -43,36 +43,48 @@
     <!-- Context Filter Row -->
     <div class="slds-p-horizontal_small slds-p-bottom_small">
       <div class="slds-button-group" role="group">
-        <lightning-button
-          label="All"
-          onclick={handleFilterAll}
+        <button
+          type="button"
           class={allButtonClass}
-        ></lightning-button>
-        <lightning-button
-          label="Potentials"
-          onclick={handleFilterPotential}
+          onclick={handleFilterAll}
+        >
+          All
+        </button>
+        <button
+          type="button"
           class={potentialButtonClass}
-        ></lightning-button>
-        <lightning-button
-          label="Leads"
-          onclick={handleFilterLead}
+          onclick={handleFilterPotential}
+        >
+          Potentials
+        </button>
+        <button
+          type="button"
           class={leadButtonClass}
-        ></lightning-button>
-        <lightning-button
-          label="Accounts"
-          onclick={handleFilterAccount}
+          onclick={handleFilterLead}
+        >
+          Leads
+        </button>
+        <button
+          type="button"
           class={accountButtonClass}
-        ></lightning-button>
-        <lightning-button
-          label="Opportunities"
-          onclick={handleFilterOpportunity}
+          onclick={handleFilterAccount}
+        >
+          Accounts
+        </button>
+        <button
+          type="button"
           class={opportunityButtonClass}
-        ></lightning-button>
-        <lightning-button
-          label="To-Do"
-          onclick={handleFilterTodo}
+          onclick={handleFilterOpportunity}
+        >
+          Opportunities
+        </button>
+        <button
+          type="button"
           class={todoButtonClass}
-        ></lightning-button>
+          onclick={handleFilterTodo}
+        >
+          To-Do
+        </button>
       </div>
     </div>
 

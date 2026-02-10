@@ -165,40 +165,50 @@ export default class InsightsAndAlertsWindow extends LightningElement {
     return 'slds-m-right_x-small';
   }
 
-  selectedButtonStyle = 'btn-all-selected';
-  selectedBadgeStyle = 'badge-all-selected';
+  selectedButtonStyle = 'custom-button selected';
+  regularButtonStyle = 'custom-button';
 
   getFilterButtonClasses(buttonType, selectedStyle, additionalStyling) {
-    return `${this.selectedFilter === buttonType ? selectedStyle : ''} ${additionalStyling}`.trim();
+    const baseClass = this.selectedFilter === buttonType ? selectedStyle : this.regularButtonStyle;
+    // Add context-specific class using lookup table
+    const contextClassLookup = {
+      'Potential': 'potential',
+      'Lead': 'lead',
+      'Account': 'account',
+      'Opportunity': 'opportunity',
+      'To-Do': 'todo'
+    };
+    const contextClass = contextClassLookup[buttonType] || '';
+    return `${baseClass} ${contextClass} ${additionalStyling}`.trim();
   }
 
   getBadgeSelectedClass() {
-    return this.getFilterButtonClasses('All', this.selectedBadgeStyle, '');
+    return this.getFilterButtonClasses('All', 'custom-button selected', '');
   }
 
   // Predefined button classes for each context
   get allButtonClass() {
-    return this.getFilterButtonClasses('All', this.selectedButtonStyle, 'slds-m-right_x-small');
+    return this.getFilterButtonClasses('All', 'custom-button selected', 'slds-m-right_x-small');
   }
 
   get potentialButtonClass() {
-    return this.getFilterButtonClasses('Potential', this.selectedButtonStyle, this.ctxButtonClass);
+    return this.getFilterButtonClasses('Potential', 'custom-button selected', this.ctxButtonClass);
   }
 
   get leadButtonClass() {
-    return this.getFilterButtonClasses('Lead', this.selectedButtonStyle, this.ctxButtonClass);
+    return this.getFilterButtonClasses('Lead', 'custom-button selected', this.ctxButtonClass);
   }
 
   get accountButtonClass() {
-    return this.getFilterButtonClasses('Account', this.selectedButtonStyle, this.ctxButtonClass);
+    return this.getFilterButtonClasses('Account', 'custom-button selected', this.ctxButtonClass);
   }
 
   get opportunityButtonClass() {
-    return this.getFilterButtonClasses('Opportunity', this.selectedButtonStyle, this.ctxButtonClass);
+    return this.getFilterButtonClasses('Opportunity', 'custom-button selected', this.ctxButtonClass);
   }
 
   get todoButtonClass() {
-    return this.getFilterButtonClasses('To-Do', this.selectedButtonStyle, this.ctxButtonClass);
+    return this.getFilterButtonClasses('To-Do', 'custom-button selected', this.ctxButtonClass);
   }
 
   // Helper to get badge label (used in template)
