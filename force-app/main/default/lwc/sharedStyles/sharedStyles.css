@@ -1,0 +1,25 @@
+:host {
+  --potential-color: #b4d1de;
+  --lead-color: #1894c9;
+  --account-color: #97c39b;
+  --opportunity-color: #c9b4de;
+  --todo-color: #efe183;
+
+  --button-border-color: #16325c;
+
+  --border-color: #ebebeb;
+
+  --hover-color: #f3f3f3;
+
+  --default-background-color: #ffffff;
+
+  --hover-transition-speed: 0.1s;
+  --hover-transition-timing-function: ease-in-out;
+
+  --hover-transition: background-color var(--hover-transition-speed) var(--hover-transition-timing-function);
+}
+
+.round-border {
+  border: 2px solid var(--border-color);
+  border-radius: 1rem;
+}
