@@ -184,6 +184,10 @@ export default class InsightsAndAlertsWindow extends LightningElement {
     return this.getFilterButtonClasses('To-Do', 'custom-button selected', this.ctxButtonClass);
   }
 
+  get checkClass() {
+    return 'check undone';
+  }
+
   // Helper to get badge label (used in template)
   getBadgeLabel(insightId) {
     const rec = this.insights.find((i) => i.id === insightId);

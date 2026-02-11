@@ -96,17 +96,20 @@
                   {ins.rationale}
                 </div>
               </div>
-              <div class="slds-col slds-grid slds-grid_vertical-align-center slds-grid_align-end slds-gutters_x-small right-controls">
+              <div class="slds-col slds-grid slds-grid_vertical-align-center slds-grid_align-end right-controls">
                 <!-- Context Badge -->
                 <span class={ins.badgeFullClass}>{ins.context}</span>
                 <!-- Completed Checkbox -->
-                <lightning-input
+                
+                <lightning-icon icon-name="utility:check" variant="inverse" size="small" class={checkClass}></lightning-icon>
+
+                <!--<lightning-input
                   type="checkbox"
                   checked={ins.completed}
                   data-id={ins.id}
                   message-when-bad-input="Unable to update"
                   onchange={handleCompletedToggle}
-                ></lightning-input>
+                ></lightning-input>-->
               </div>
             </div>
 
