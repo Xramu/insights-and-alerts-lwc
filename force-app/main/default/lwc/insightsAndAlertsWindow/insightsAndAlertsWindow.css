@@ -11,6 +11,10 @@
   border-radius: 0.25rem;
 }
 
+.main-container {
+  background-color: var(--default-background-color);
+}
+
 .expand-toggle {
   cursor: pointer;
 }
