@@ -1,15 +1,22 @@
+@import 'c/sharedStyles';
+
 :host {
   --detail-background-color: #f3f3f3;
 }
 
 /* Detail section styles */
 .detail-container {
-  background: var(--detail-background-color);
+  background-color: var(--default-background-color, white);
   padding: 1rem;
 }
 
 .detail-expander {
-  background-color: var(--detail-background-color);
+    background-color: var(--default-background-color, white);
+    transition: var(--hover-transition);
+}
+
+.detail-expander:hover {
+    background-color: var(--hover-color, gray);
 }
 
 .slds-section__title .slds-button.slds-section__title-action {

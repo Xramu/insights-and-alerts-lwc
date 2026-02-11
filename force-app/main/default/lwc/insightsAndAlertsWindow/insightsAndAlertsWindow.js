@@ -121,32 +121,6 @@ export default class InsightsAndAlertsWindow extends LightningElement {
     this.selectedFilter = 'To-Do';
   };
 
-  // Button styles depend on selection; we return style strings
-  get allButtonStyle() {
-    // darker grey when selected
-    return this.selectedFilter === 'All' ? 'background:#9e9e9e;color:white' : '';
-  }
-  get potentialStyle() {
-    return this.selectedFilter === 'Potential' ? this.styleFor('Potential') : '';
-  }
-  get leadStyle() {
-    return this.selectedFilter === 'Lead' ? this.styleFor('Lead') : '';
-  }
-  get accountStyle() {
-    return this.selectedFilter === 'Account' ? this.styleFor('Account') : '';
-  }
-  get opportunityStyle() {
-    return this.selectedFilter === 'Opportunity' ? this.styleFor('Opportunity') : '';
-  }
-  get todoStyle() {
-    return this.selectedFilter === 'To-Do' ? this.styleFor('To-Do') : '';
-  }
-
-  styleFor(ctx) {
-    const color = this.contextColorMap[ctx] || '';
-    return color ? `background:${color};color:#16325c` : '';
-  }
-
   getBadgeClass(context) {
     const classLookup = {
       'Potential': 'badge-potential',

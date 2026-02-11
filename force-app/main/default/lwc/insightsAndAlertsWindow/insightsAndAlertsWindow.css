@@ -1,20 +1,31 @@
-:host {
-  --potential-color: #b4d1de;
-  --lead-color: #1894c9;
-  --account-color: #97c39b;
-  --opportunity-color: #c9b4de;
-  --todo-color: #efe183;
+@import 'c/sharedStyles';
 
-  --button-border-color: #16325c;
-  
-  --all-color: #9e9e9e;
-  --all-border-color: white;
+:host {
+  --all-button-color: #9e9e9e;
+  --all-button-border-color: white;
 }
 
 /* SLDS-friendly tweaks and component-scoped styles */
 .slds-card {
   border: 1px solid #dddbda;
   border-radius: 0.25rem;
+}
+
+.expand-toggle {
+  cursor: pointer;
+}
+
+.insight-section {
+  background-color: var(--default-background-color, white);
+  transition: var(--hover-transition);
+}
+
+.insight-section .rationale {
+  white-space: normal;
+}
+
+.insight-section:has(.expand-toggle:hover) {
+  background-color: var(--hover-color, blue);
 }
 
 .section-header {
@@ -26,10 +37,6 @@
 
 .section-header:hover {
   background: #f3f2f2;
-}
-
-.insight-section .rationale {
-  white-space: normal;
 }
 
 .right-controls {
@@ -73,14 +80,14 @@
 }
 
 .badge-all-selected {
-  background: var(--all-color);
-  color: var(--all-border-color);
+  background: var(--all-button-color);
+  color: var(--all-button-border-color);
 }
 
 /* Button styles */
 .btn-all-selected {
-  background: var(--all-color);
-  color: var(--all-border-color);
+  background: var(--all-button-color);
+  color: var(--all-button-border-color);
 }
 
 /* Custom button styles */
@@ -97,7 +104,7 @@
   display: inline-block;
   text-align: center;
   vertical-align: middle;
-  transition: background-color 0.2s ease;
+  transition: all var(--hover-transition-speed) var(--hover-transition-timing-function);
 }
 
 .custom-button:hover {
@@ -141,8 +148,8 @@
 
 /* Selected button styles */
 .custom-button.selected {
-  background-color: var(--all-color);
-  color: var(--all-border-color);
+  background-color: var(--all-button-color);
+  color: var(--all-button-border-color);
 }
 
 /* Ensure selected context buttons maintain their color when selected */
