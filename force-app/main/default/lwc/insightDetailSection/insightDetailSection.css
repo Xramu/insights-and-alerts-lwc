@@ -4,15 +4,31 @@
   --detail-background-color: #f3f3f3;
 }
 
+.details-expander-wrapper {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
 /* Detail section styles */
 .detail-container {
   background-color: var(--default-background-color, white);
   padding: 1rem;
+  margin-top: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
 }
 
 .detail-expander {
     background-color: var(--default-background-color, white);
     transition: var(--hover-transition);
+    margin: 0;
+}
+
+.detail-expander.open {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom: 0;
 }
 
 .detail-expander:hover {

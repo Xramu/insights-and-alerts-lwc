@@ -9,9 +9,9 @@
   <div class="slds-card__body_inner">
     <!-- Details collapsible -->
     <div class="slds-section slds-m-bottom_small">
-      <h3 class="slds-section__title">
+      <h3 class="slds-section__title details-expander-wrapper">
         <button
-          class="slds-button slds-section__title-action slds-card detail-expander round-border"
+          class={expanderClass}
           aria-controls="details-content"
           aria-expanded={detailsExpanded}
           onclick={toggleDetails}
@@ -21,10 +21,10 @@
         </button>
       </h3>
       <template if:true={detailsExpanded}>
-          <div class="slds-card detail-container round-border">
-            <lightning-formatted-rich-text value={details}></lightning-formatted-rich-text>
-          </div>
-        </template>
+        <div class="slds-card round-border detail-container">
+          <lightning-formatted-rich-text value={details}></lightning-formatted-rich-text>
+        </div>
+      </template>
     </div>
 
     <!-- Actions row -->

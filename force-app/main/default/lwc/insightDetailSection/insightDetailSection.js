@@ -30,6 +30,10 @@ export default class InsightDetailSection extends LightningElement {
     return this.detailsExpandedInternal;
   }
 
+  get expanderClass() {
+    return `slds-button slds-section__title-action slds-card round-border detail-expander ${this.detailsExpanded ? 'open' : ''}`;
+  }
+
   get chevronClass() {
     return this.detailsExpanded ? 'chev rotate' : 'chev';
   }
