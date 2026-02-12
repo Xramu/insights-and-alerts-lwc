@@ -62,13 +62,11 @@ export default class InsightsAndAlertsWindow extends LightningElement {
         openRecordUrl: r.Open_Record__c || '',
         completed: !!r.Completed__c,
         suggestedAction: r.Suggested_Action__c || '',
-        // Pre-computed properties for template use
-        badgeClass: this.getBadgeClass(r.Id),
-        badgeSelectedClass: this.getBadgeSelectedClass(),
-        badgeFullClass: `slds-badge slds-m-right_small ${this.getBadgeClass(r.Context__c)}`,
+        badgeFullClass: `slds-badge ${this.getBadgeClass(r.Context__c)}`,
         badgeLabel: this.getBadgeLabel(r.Id),
         isExpanded: !!this.expandedMap.get(r.Id),
-        isDetailsExpanded: !!this.expandedMap.get(r.Id)
+        isDetailsExpanded: !!this.expandedMap.get(r.Id),
+        chevronClass: this.getChevronClass(false)
       }));
       // preserve expansion where possible
       const newExpanded = new Map();
@@ -120,6 +118,10 @@ export default class InsightsAndAlertsWindow extends LightningElement {
   handleFilterTodo = () => {
     this.selectedFilter = 'To-Do';
   };
+
+  getChevronClass(expanded) {
+    return `insight-section-chevron chev ${expanded ? 'rotate' : ''}`.trim();
+  }
 
   getBadgeClass(context) {
     const classLookup = {
@@ -207,7 +209,10 @@ export default class InsightsAndAlertsWindow extends LightningElement {
         const newState = !insight.isExpanded;
         this.expandedMap.set(id, newState);
 
-        return { ...insight, isExpanded: newState };
+        return { ...insight,
+          isExpanded: newState,
+          chevronClass: this.getChevronClass(newState)        
+        };
       }
       
       return insight;

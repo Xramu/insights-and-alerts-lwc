@@ -87,8 +87,9 @@
         <template for:each={filteredInsights} for:item="ins">
           <section key={ins.id} class="insight-section slds-m-bottom_small round-border">
             <!-- Collapsed header area (always visible) -->
-            <div class="slds-grid slds-grid_align-spread slds-p-around_small expand-toggle" data-id={ins.id} onclick={toggleExpand}>
-              <div class="slds-col slds-truncate">
+            <div class="slds-grid slds-grid_align-spread expand-toggle" data-id={ins.id} onclick={toggleExpand}>
+              <lightning-icon icon-name="utility:chevrondown" size="x-small" class={ins.chevronClass}></lightning-icon>
+              <div class="slds-col slds-truncate insight-info-section">
                 <div class="slds-text-heading_small slds-truncate" title={ins.topic}>
                   {ins.topic}
                 </div>
@@ -96,7 +97,7 @@
                   {ins.rationale}
                 </div>
               </div>
-              <div class="slds-col slds-grid slds-grid_vertical-align-center slds-grid_align-end right-controls">
+              <div class="slds-col slds-grid slds-grid_vertical-align-center slds-grid_align-end">
                 <!-- Context Badge -->
                 <span class={ins.badgeFullClass}>{ins.context}</span>
                 <!-- Completed Checkbox -->

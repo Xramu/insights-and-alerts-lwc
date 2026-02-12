@@ -40,14 +40,6 @@
   text-align: left;
 }
 
-.chev {
-  transition: transform 0.2s ease-in-out;
-}
-
-.chev.rotate {
-  transform: rotate(180deg);
-}
-
 .rich-content {
   /* allow rich text to wrap nicely */
   word-wrap: break-word;

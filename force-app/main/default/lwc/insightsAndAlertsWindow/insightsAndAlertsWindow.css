@@ -17,6 +17,11 @@
 
 .expand-toggle {
   cursor: pointer;
+  padding: var(--common-padding);
+}
+
+.insight-section-chevron {
+  align-content: center;
 }
 
 .insight-section {
@@ -30,6 +35,11 @@
 
 .insight-section:has(.expand-toggle:hover) {
   background-color: var(--hover-color, blue);
+}
+
+.insight-info-section {
+  padding-left: var(--common-padding);
+  padding-right: var(--common-padding);
 }
 
 .section-header {
@@ -50,6 +60,7 @@
 
 .slds-badge {
   border: 0;
+  margin-right: var(--common-padding);
 }
 
 .slds-button-group .slds-button {
