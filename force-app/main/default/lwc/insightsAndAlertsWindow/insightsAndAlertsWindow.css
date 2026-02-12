@@ -1,14 +1,14 @@
 @import 'c/sharedStyles';
 
 :host {
-  --button-text-color: #2f2f2f;
+  --button-text-color: var(--slds-g-color-on-surface-3);
   --selected-button-dark-mix: 20%;
   --all-button-color: #cfcfcf;
   --all-button-border-color: white;
   
   /* For whatever reason, I can not make just a variable of the oclor mix with an overridable variable so all the values are here now... */
   --button-shadow-mix-color: black;
-  --button-shadow-mix-percentage: 50%;
+  --button-shadow-mix-percentage: 30%;
   --button-shadow-size: 0 0 0 2px;
 }
 
@@ -63,7 +63,16 @@
 }
 
 .insight-section:has(.expand-toggle:hover) {
-  background-color: var(--hover-color, blue);
+  background-color: var(--hover-color, grey);
+  border-color: var(--border-hover-color);
+}
+
+.expand-toggle:hover .chev {
+  scale: var(--chev-hover-scale);
+}
+
+.expand-toggle:active .chev {
+  scale: var(--chev-active-scale);
 }
 
 .insight-info-section {
@@ -148,7 +157,7 @@
 }
 
 .custom-button:active {
-  transform: translateY(1px);
+  transform: scale(0.95);
 }
 
 .custom-button.all.selected {
@@ -194,6 +203,10 @@
 
 .custom-button.todo.selected {
   box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--todo-color), var(--button-shadow-mix-color) var(--button-shadow-mix-percentage));
+}
+
+.custom-button.selected {
+  font-weight: 600;
 }
 
 .check {

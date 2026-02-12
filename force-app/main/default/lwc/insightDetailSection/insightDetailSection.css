@@ -32,7 +32,16 @@
 }
 
 .detail-expander:hover {
-    background-color: var(--hover-color, gray);
+  background-color: var(--common-gray);
+  border-color: var(--border-hover-color);
+}
+
+.detail-expander:hover .chev {
+  scale: 1.2;
+}
+
+.detail-expander:active .chev {
+  scale: var(--chev-active-scale);
 }
 
 .slds-section__title .slds-button.slds-section__title-action {

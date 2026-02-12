@@ -10,7 +10,8 @@
 
   --button-border-color: #16325c;
 
-  --border-color: #ebebeb;
+  --border-color: #e4e4e4;
+  --border-hover-color: color-mix(in srgb, var(--border-color), black 5%);
 
   --hover-color: var(--common-gray);
 
@@ -22,6 +23,11 @@
   --hover-transition: background-color var(--hover-transition-speed) var(--hover-transition-timing-function);
 
   --common-padding: 0.5rem;
+
+  --common-all-quick-transition: all 0.1s ease-in-out;
+
+  --chev-hover-scale: 1.3;
+  --chev-active-scale: 0.95;
 }
 
 .round-border {
@@ -31,7 +37,7 @@
 
 .chev {
   transform: rotate(-90deg);
-  transition: transform 0.1s ease-in-out;
+  transition: var(--common-all-quick-transition);
 }
 
 .chev.rotate {
