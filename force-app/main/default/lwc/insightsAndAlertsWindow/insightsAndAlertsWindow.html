@@ -91,9 +91,6 @@
                 <div class="slds-text-heading_small slds-truncate" title={ins.topic}>
                   {ins.topic}
                 </div>
-                <div class="slds-text-body_small slds-text-color_weak slds-m-top_xx-small rationale">
-                  {ins.rationale}
-                </div>
               </div>
               <div class="slds-col slds-grid slds-grid_vertical-align-center slds-grid_align-end">
                 <!-- Context Badge -->
@@ -114,7 +111,10 @@
 
             <!-- Expanded area -->
             <template if:true={ins.isExpanded}>
-              <div class="slds-p-horizontal_small slds-p-bottom_small">
+              <div class="slds-text-body_small slds-text-color_weak slds-m-top_xx-small rationale">
+                {ins.rationale}
+              </div>
+              <div class="slds-p-bottom_small">
                 <c-insight-detail-section
                   record-id={ins.id}
                   topic={ins.topic}

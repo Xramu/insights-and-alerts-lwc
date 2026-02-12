@@ -58,8 +58,10 @@
   transition: var(--hover-transition);
 }
 
-.insight-section .rationale {
+.rationale {
   white-space: normal;
+  padding-left: var(--common-padding);
+  padding-right: var(--common-padding);
 }
 
 .insight-section:has(.expand-toggle:hover) {
@@ -78,6 +80,10 @@
 .insight-info-section {
   padding-left: var(--common-padding);
   padding-right: var(--common-padding);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  justify-content: center;
 }
 
 .section-header {

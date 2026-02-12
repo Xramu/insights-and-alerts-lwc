@@ -4,6 +4,11 @@
   --detail-background-color: #f3f3f3;
 }
 
+.detail-main {
+  padding-left: var(--common-padding);
+  padding-right: var(--common-padding);
+}
+
 .details-expander-wrapper {
   margin: 0 !important;
   padding: 0 !important;
