@@ -28,22 +28,19 @@
     </div>
 
     <!-- Actions row -->
-    <div class="slds-grid slds-gutters_x-small">
-      <div class="slds-col">
-        <lightning-button
-          variant="brand"
-          label={suggestedActionLabel}
-          onclick={handleSuggestedAction}
-        ></lightning-button>
-      </div>
+    <div class="action-buttons-row">
+      <lightning-button
+        icon-name="utility:sparkles"
+        variant="brand"
+        label={suggestedActionLabel}
+        onclick={handleSuggestedAction}
+      ></lightning-button>
       <template if:true={showViewButton}>
-        <div class="slds-col">
-          <lightning-button
-            variant="neutral"
-            label={viewButtonLabel}
-            onclick={handleViewRecord}
-          ></lightning-button>
-        </div>
+        <lightning-button
+          variant="neutral"
+          label={viewButtonLabel}
+          onclick={handleViewRecord}
+        ></lightning-button>
       </template>
     </div>
   </div>

@@ -44,3 +44,9 @@
   /* allow rich text to wrap nicely */
   word-wrap: break-word;
 }
+
+.action-buttons-row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--common-padding);
+}
