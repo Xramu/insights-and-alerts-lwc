@@ -135,8 +135,8 @@ export default class InsightsAndAlertsWindow extends LightningElement {
     return classLookup[context] || '';
   }
 
-  selectedButtonStyle = 'custom-button selected';
   regularButtonStyle = 'custom-button';
+  selectedButtonStyle = `${this.regularButtonStyle} selected`;
 
   getFilterButtonClasses(buttonType, selectedStyle, additionalStyling) {
     const baseClass = this.selectedFilter === buttonType ? selectedStyle : this.regularButtonStyle;
@@ -146,39 +146,40 @@ export default class InsightsAndAlertsWindow extends LightningElement {
       'Lead': 'lead',
       'Account': 'account',
       'Opportunity': 'opportunity',
-      'To-Do': 'todo'
+      'To-Do': 'todo',
+      'All': 'all'
     };
     const contextClass = contextClassLookup[buttonType] || '';
     return `${baseClass} ${contextClass} ${additionalStyling}`.trim();
   }
 
   getBadgeSelectedClass() {
-    return this.getFilterButtonClasses('All', 'custom-button selected', '');
+    return this.getFilterButtonClasses('All', this.selectedButtonStyle, '');
   }
 
   // Predefined button classes for each context
   get allButtonClass() {
-    return this.getFilterButtonClasses('All', 'custom-button selected', '');
+    return this.getFilterButtonClasses('All', this.selectedButtonStyle, '');
   }
 
   get potentialButtonClass() {
-    return this.getFilterButtonClasses('Potential', 'custom-button selected', '');
+    return this.getFilterButtonClasses('Potential', this.selectedButtonStyle, '');
   }
 
   get leadButtonClass() {
-    return this.getFilterButtonClasses('Lead', 'custom-button selected', '');
+    return this.getFilterButtonClasses('Lead', this.selectedButtonStyle, '');
   }
 
   get accountButtonClass() {
-    return this.getFilterButtonClasses('Account', 'custom-button selected', '');
+    return this.getFilterButtonClasses('Account', this.selectedButtonStyle, '');
   }
 
   get opportunityButtonClass() {
-    return this.getFilterButtonClasses('Opportunity', 'custom-button selected', '');
+    return this.getFilterButtonClasses('Opportunity', this.selectedButtonStyle, '');
   }
 
   get todoButtonClass() {
-    return this.getFilterButtonClasses('To-Do', 'custom-button selected', '');
+    return this.getFilterButtonClasses('To-Do', this.selectedButtonStyle, '');
   }
 
   get checkClass() {

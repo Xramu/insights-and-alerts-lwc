@@ -6,11 +6,13 @@
   --todo-color: #3BA755;
   --check-color: #54bd5b;
 
+  --common-gray: #f3f3f3;
+
   --button-border-color: #16325c;
 
   --border-color: #ebebeb;
 
-  --hover-color: #f3f3f3;
+  --hover-color: var(--common-gray);
 
   --default-background-color: #ffffff;
 

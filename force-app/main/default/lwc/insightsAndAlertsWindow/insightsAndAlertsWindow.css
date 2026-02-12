@@ -1,8 +1,15 @@
 @import 'c/sharedStyles';
 
 :host {
-  --all-button-color: #9e9e9e;
+  --button-text-color: #2f2f2f;
+  --selected-button-dark-mix: 20%;
+  --all-button-color: #cfcfcf;
   --all-button-border-color: white;
+  
+  /* For whatever reason, I can not make just a variable of the oclor mix with an overridable variable so all the values are here now... */
+  --button-shadow-mix-color: black;
+  --button-shadow-mix-percentage: 50%;
+  --button-shadow-size: 0 0 0 2px;
 }
 
 /* SLDS-friendly tweaks and component-scoped styles */
@@ -85,11 +92,6 @@
   margin-right: var(--common-padding);
 }
 
-.slds-button-group .slds-button {
-  /* ensure visual separation even if SLDS compacts */
-  margin-right: 0.25rem;
-}
-
 /* Context badge colors */
 .badge-potential {
   background: var(--potential-color);
@@ -121,19 +123,13 @@
   color: var(--all-button-border-color);
 }
 
-/* Button styles */
-.btn-all-selected {
-  background: var(--all-button-color);
-  color: var(--all-button-border-color);
-}
-
 /* Custom button styles */
 .custom-button {
   border: none;
   border-radius: 20px;
   padding: 0.5rem 1rem;
-  background-color: #f3f2f2;
-  color: #000;
+  background-color: var(--all-button-color);
+  color: var(--button-text-color) !important;
   cursor: pointer;
   font-weight: 400;
   text-decoration: none;
@@ -143,74 +139,61 @@
   transition: all var(--hover-transition-speed) var(--hover-transition-timing-function);
 }
 
-.custom-button:hover {
-  opacity: 0.8;
+.custom-button:focus {
+  box-shadow: none;
 }
 
-.custom-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #0070d2;
+.custom-button:hover {
+  transform: scale(1.05);
 }
 
 .custom-button:active {
   transform: translateY(1px);
 }
 
+.custom-button.all.selected {
+  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--all-button-color), var(--button-shadow-mix-color) var(--button-shadow-mix-percentage));
+}
+
 /* Context-specific button colors */
 .custom-button.potential {
   background-color: var(--potential-color);
-  color: var(--button-border-color);
+}
+
+.custom-button.potential.selected {
+  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--potential-color), var(--button-shadow-mix-color) var(--button-shadow-mix-percentage));
 }
 
 .custom-button.lead {
   background-color: var(--lead-color);
-  color: var(--button-border-color);
+}
+
+.custom-button.lead.selected {
+  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--lead-color), var(--button-shadow-mix-color) var(--button-shadow-mix-percentage));
 }
 
 .custom-button.account {
   background-color: var(--account-color);
-  color: var(--button-border-color);
+}
+
+.custom-button.account.selected {
+  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--account-color), var(--button-shadow-mix-color) var(--button-shadow-mix-percentage));
 }
 
 .custom-button.opportunity {
   background-color: var(--opportunity-color);
-  color: var(--button-border-color);
+}
+
+.custom-button.opportunity.selected {
+  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--opportunity-color), var(--button-shadow-mix-color) var(--button-shadow-mix-percentage));
 }
 
 .custom-button.todo {
   background-color: var(--todo-color);
-  color: var(--button-border-color);
 }
 
-/* Selected button styles */
-.custom-button.selected {
-  border: 2px pink;
-}
-
-/* Ensure selected context buttons maintain their color when selected */
-.custom-button.selected.potential {
-  background-color: var(--potential-color);
-  color: var(--button-border-color);
-}
-
-.custom-button.selected.lead {
-  background-color: var(--lead-color);
-  color: var(--button-border-color);
-}
-
-.custom-button.selected.account {
-  background-color: var(--account-color);
-  color: var(--button-border-color);
-}
-
-.custom-button.selected.opportunity {
-  background-color: var(--opportunity-color);
-  color: var(--button-border-color);
-}
-
-.custom-button.selected.todo {
-  background-color: var(--todo-color);
-  color: var(--button-border-color);
+.custom-button.todo.selected {
+  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--todo-color), var(--button-shadow-mix-color) var(--button-shadow-mix-percentage));
 }
 
 .check {
