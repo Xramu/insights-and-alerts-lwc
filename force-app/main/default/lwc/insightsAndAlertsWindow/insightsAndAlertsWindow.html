@@ -9,7 +9,7 @@
 <template>
   <div class="round-border main-container">
     <!-- Title Row -->
-    <div class="slds-card__header slds-grid slds-grid_align-spread slds-p-around_small">
+    <div class="slds-grid slds-grid_align-spread header-row">
       <header class="slds-media slds-media_center slds-has-flexi-truncate">
         <div class="slds-media__body">
           <h1 class="slds-card__header-title slds-truncate" title="Intelligent Alerts">
@@ -29,12 +29,12 @@
     </div>
 
     <!-- Description Row -->
-    <div class="slds-p-horizontal_small slds-p-bottom_small slds-text-body_small slds-text-color_weak">
+    <div class="slds-text-body_small slds-text-color_weak sub-header-row">
       <p>Today's Priorities & Insights</p>
     </div>
 
     <!-- Context Filter Row -->
-    <div class="slds-p-horizontal_small slds-p-bottom_small">
+    <div class="filter-buttons-row slds-p-bottom_small">
       <div class="slds-button-group" role="group">
         <button
           type="button"
@@ -82,7 +82,7 @@
     </div>
 
     <!-- Insights List -->
-    <div class="slds-p-around_small">
+    <div class="insights-list">
       <template if:true={hasData}>
         <template for:each={filteredInsights} for:item="ins">
           <section key={ins.id} class="insight-section slds-m-bottom_small round-border">

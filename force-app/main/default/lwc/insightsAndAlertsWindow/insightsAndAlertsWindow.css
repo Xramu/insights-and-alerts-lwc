@@ -11,6 +11,14 @@
   border-radius: 0.25rem;
 }
 
+.header-row {
+  padding: var(--common-padding);
+}
+
+.sub-header-row {
+  padding: var(--common-padding);
+}
+
 .main-container {
   background-color: var(--default-background-color);
 }
@@ -22,6 +30,14 @@
 
 .insight-section-chevron {
   align-content: center;
+}
+
+.filter-buttons-row {
+  padding: var(--common-padding);
+}
+
+.insights-list {
+  padding: var(--common-padding);
 }
 
 .insight-section {
