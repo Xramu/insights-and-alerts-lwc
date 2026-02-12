@@ -135,11 +135,6 @@ export default class InsightsAndAlertsWindow extends LightningElement {
     return classLookup[context] || '';
   }
 
-  // Computed button classes/styles (no inline concatenation in template)
-  get ctxButtonClass() {
-    return 'slds-m-right_x-small';
-  }
-
   selectedButtonStyle = 'custom-button selected';
   regularButtonStyle = 'custom-button';
 
@@ -163,27 +158,27 @@ export default class InsightsAndAlertsWindow extends LightningElement {
 
   // Predefined button classes for each context
   get allButtonClass() {
-    return this.getFilterButtonClasses('All', 'custom-button selected', 'slds-m-right_x-small');
+    return this.getFilterButtonClasses('All', 'custom-button selected', '');
   }
 
   get potentialButtonClass() {
-    return this.getFilterButtonClasses('Potential', 'custom-button selected', this.ctxButtonClass);
+    return this.getFilterButtonClasses('Potential', 'custom-button selected', '');
   }
 
   get leadButtonClass() {
-    return this.getFilterButtonClasses('Lead', 'custom-button selected', this.ctxButtonClass);
+    return this.getFilterButtonClasses('Lead', 'custom-button selected', '');
   }
 
   get accountButtonClass() {
-    return this.getFilterButtonClasses('Account', 'custom-button selected', this.ctxButtonClass);
+    return this.getFilterButtonClasses('Account', 'custom-button selected', '');
   }
 
   get opportunityButtonClass() {
-    return this.getFilterButtonClasses('Opportunity', 'custom-button selected', this.ctxButtonClass);
+    return this.getFilterButtonClasses('Opportunity', 'custom-button selected', '');
   }
 
   get todoButtonClass() {
-    return this.getFilterButtonClasses('To-Do', 'custom-button selected', this.ctxButtonClass);
+    return this.getFilterButtonClasses('To-Do', 'custom-button selected', '');
   }
 
   get checkClass() {

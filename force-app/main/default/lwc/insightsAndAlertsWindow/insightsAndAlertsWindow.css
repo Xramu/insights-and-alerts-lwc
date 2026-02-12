@@ -34,6 +34,12 @@
 
 .filter-buttons-row {
   padding: var(--common-padding);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .insights-list {
@@ -126,7 +132,6 @@
   border: none;
   border-radius: 20px;
   padding: 0.5rem 1rem;
-  margin-right: 0.25rem;
   background-color: #f3f2f2;
   color: #000;
   cursor: pointer;
@@ -209,7 +214,7 @@
 }
 
 .check {
-  background-color: var(--account-color);
+  background-color: var(--check-color, green);
   padding: 0.5rem;
   transition: all var(--hover-transition-speed) var(--hover-transition-timing-function);
 }
