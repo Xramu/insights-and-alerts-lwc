@@ -7,9 +7,11 @@
   --all-button-border-color: white;
   
   /* For whatever reason, I can not make just a variable of the oclor mix with an overridable variable so all the values are here now... */
-  --button-shadow-mix-color: black;
+  --button-shadow-dark-mix-color: black;
+  --button-shadow-light-mix-color: white;
   --button-shadow-mix-percentage: 30%;
-  --button-shadow-size: 0 0 0 2px;
+  --button-shadow-width: 2px;
+  --button-shadow-size: 0 0 0 var(--button-shadow-width);
 }
 
 /* SLDS-friendly tweaks and component-scoped styles */
@@ -19,15 +21,19 @@
 }
 
 .header-row {
-  padding: var(--common-padding);
+  padding-bottom: var(--common-padding);
 }
 
 .sub-header-row {
-  padding: var(--common-padding);
+  padding-bottom: var(--common-padding);
 }
 
 .main-container {
   background-color: var(--default-background-color);
+  padding-block-start: var(--slds-c-card-header-spacing-block-start, var(--slds-c-card-header-spacing-block, var(--slds-g-spacing-var-block-3)));
+  padding-block-end: var(--slds-c-card-header-spacing-block-start, var(--slds-c-card-header-spacing-block, var(--slds-g-spacing-var-block-3)));
+  padding-inline-start: var(--slds-c-card-header-spacing-inline-start, var(--slds-c-card-header-spacing-inline, var(--slds-g-spacing-var-inline-4)));
+  padding-inline-end: var(--slds-c-card-header-spacing-inline-end, var(--slds-c-card-header-spacing-inline, var(--slds-g-spacing-var-inline-4)));
 }
 
 .expand-toggle {
@@ -40,17 +46,18 @@
 }
 
 .filter-buttons-row {
-  padding: var(--common-padding);
+  padding-bottom: var(--common-padding);
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
   width: 100%;
-  overflow-x: hidden;
 }
 
 .insights-list {
-  padding: var(--common-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--common-padding);
 }
 
 .insight-section {
@@ -146,7 +153,7 @@
   background-color: var(--all-button-color);
   color: var(--button-text-color) !important;
   cursor: pointer;
-  font-weight: 400;
+  font-weight: 600;
   text-decoration: none;
   display: inline-block;
   text-align: center;
@@ -167,7 +174,7 @@
 }
 
 .custom-button.all.selected {
-  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--all-button-color), var(--button-shadow-mix-color) var(--button-shadow-mix-percentage));
+  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--all-button-color), var(--button-shadow-dark-mix-color) var(--button-shadow-mix-percentage));
 }
 
 /* Context-specific button colors */
@@ -176,7 +183,7 @@
 }
 
 .custom-button.potential.selected {
-  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--potential-color), var(--button-shadow-mix-color) var(--button-shadow-mix-percentage));
+  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--potential-color), var(--button-shadow-dark-mix-color) var(--button-shadow-mix-percentage));
 }
 
 .custom-button.lead {
@@ -184,7 +191,7 @@
 }
 
 .custom-button.lead.selected {
-  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--lead-color), var(--button-shadow-mix-color) var(--button-shadow-mix-percentage));
+  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--lead-color), var(--button-shadow-dark-mix-color) var(--button-shadow-mix-percentage));
 }
 
 .custom-button.account {
@@ -192,7 +199,7 @@
 }
 
 .custom-button.account.selected {
-  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--account-color), var(--button-shadow-mix-color) var(--button-shadow-mix-percentage));
+  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--account-color), var(--button-shadow-dark-mix-color) var(--button-shadow-mix-percentage));
 }
 
 .custom-button.opportunity {
@@ -200,7 +207,7 @@
 }
 
 .custom-button.opportunity.selected {
-  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--opportunity-color), var(--button-shadow-mix-color) var(--button-shadow-mix-percentage));
+  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--opportunity-color), var(--button-shadow-dark-mix-color) var(--button-shadow-mix-percentage));
 }
 
 .custom-button.todo {
@@ -208,11 +215,7 @@
 }
 
 .custom-button.todo.selected {
-  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--todo-color), var(--button-shadow-mix-color) var(--button-shadow-mix-percentage));
-}
-
-.custom-button.selected {
-  font-weight: 600;
+  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--todo-color), var(--button-shadow-dark-mix-color) var(--button-shadow-mix-percentage));
 }
 
 .check {
