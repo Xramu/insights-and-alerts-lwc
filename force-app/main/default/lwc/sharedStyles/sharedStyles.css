@@ -23,6 +23,7 @@
   --hover-transition: background-color var(--hover-transition-speed) var(--hover-transition-timing-function);
 
   --common-padding: 0.5rem;
+  --common-padding-x2: calc(var(--common-padding) * 2);
 
   --common-all-quick-transition: all 0.1s ease-in-out;
 

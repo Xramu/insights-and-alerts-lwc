@@ -85,23 +85,13 @@
 }
 
 .insight-info-section {
-  padding-left: var(--common-padding);
+  padding-left: var(--common-padding-x2);
   padding-right: var(--common-padding);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   justify-content: center;
-}
-
-.section-header {
-  background: #ffffff;
-  border: 1px solid #dddbda;
-  border-radius: 0.25rem;
-  cursor: pointer;
-}
-
-.section-header:hover {
-  background: #f3f2f2;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .right-controls {
