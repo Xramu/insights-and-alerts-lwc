@@ -4,11 +4,6 @@
   --detail-background-color: #f3f3f3;
 }
 
-.detail-main {
-  padding-left: var(--common-padding);
-  padding-right: var(--common-padding);
-}
-
 .details-expander-wrapper {
   margin: 0 !important;
   padding: 0 !important;
@@ -18,7 +13,7 @@
 /* Detail section styles */
 .detail-container {
   background-color: var(--default-background-color, white);
-  padding: 1rem;
+  padding: var(--common-padding);
   margin-top: 0 !important;
   border-top-left-radius: 0 !important;
   border-top-right-radius: 0 !important;

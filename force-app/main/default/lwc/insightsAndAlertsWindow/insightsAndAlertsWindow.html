@@ -97,29 +97,30 @@
                 <span class={ins.badgeFullClass}>{ins.context}</span>
                 <!-- Completed Checkbox -->
                 
+                <!-- Icon Checkmark
                 <lightning-icon icon-name="utility:check" variant="inverse" size="small" class={checkClass}></lightning-icon>
-
-                <!--<lightning-input
+                -->
+                
+                <lightning-input
                   type="checkbox"
+                  variant="label-hidden"
                   checked={ins.completed}
                   data-id={ins.id}
                   message-when-bad-input="Unable to update"
                   onchange={handleCompletedToggle}
-                ></lightning-input>-->
+                ></lightning-input>
               </div>
             </div>
 
             <!-- Expanded area -->
             <template if:true={ins.isExpanded}>
-              <div class="slds-text-body_small slds-text-color_weak slds-m-top_xx-small rationale">
-                {ins.rationale}
-              </div>
-              <div class="slds-p-bottom_small">
+              <div class="detail-section">
                 <c-insight-detail-section
                   record-id={ins.id}
                   topic={ins.topic}
                   context={ins.context}
                   details={ins.details}
+                  rationale={ins.rationale}
                   suggested-action={ins.suggestedAction}
                   open-record-url={ins.openRecordUrl}
                   expanded={ins.isDetailsExpanded}

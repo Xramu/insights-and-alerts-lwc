@@ -94,6 +94,10 @@
   width: 100%;
 }
 
+.detail-section {
+  padding: var(--common-padding);
+}
+
 .right-controls {
   min-width: 14rem;
   justify-content: flex-end;
