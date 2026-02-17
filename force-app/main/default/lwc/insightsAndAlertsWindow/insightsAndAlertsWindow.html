@@ -85,14 +85,12 @@
         <template for:each={filteredInsights} for:item="ins">
           <section key={ins.id} class="insight-section round-border">
             <!-- Collapsed header area (always visible) -->
-            <div class="slds-grid slds-grid_align-spread expand-toggle" data-id={ins.id} onclick={toggleExpand}>
+            <div class="expand-toggle" data-id={ins.id} onclick={toggleExpand}>
               <lightning-icon icon-name="utility:chevrondown" size="x-small" class={ins.chevronClass}></lightning-icon>
               <div class="slds-col slds-truncate insight-info-section">
-                <div class="slds-text-heading_small slds-truncate insight-title" title={ins.topic}>
+                <div class={ins.titleClass} title={ins.topic}>
                   {ins.topic}
                 </div>
-              </div>
-              <div class="slds-col slds-grid slds-grid_vertical-align-center slds-grid_align-end">
                 <!-- Context Badge -->
                 <span class={ins.badgeFullClass}>{ins.context}</span>
                 <!-- Completed Checkbox -->
@@ -102,6 +100,7 @@
                 -->
                 
                 <lightning-input
+                  class="insight-checkbox"
                   type="checkbox"
                   variant="label-hidden"
                   checked={ins.completed}

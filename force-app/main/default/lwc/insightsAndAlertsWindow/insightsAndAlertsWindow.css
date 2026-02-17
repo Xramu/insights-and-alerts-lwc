@@ -39,6 +39,18 @@
 .expand-toggle {
   cursor: pointer;
   padding: var(--common-padding);
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.insight-title.expanded {
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.insight-checkbox {
+  margin-left: auto;
 }
 
 .insight-section-chevron {
@@ -89,12 +101,11 @@
 
 .insight-info-section {
   padding-left: var(--common-padding-x2);
-  padding-right: var(--common-padding);
+  gap: var(--common-padding);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
 }
 
 .detail-section {
@@ -157,7 +168,7 @@
 
   flex: 0 1 auto;
   min-width: 0;
-  font-size: clamp(10px, 2.5cqw, 13px);
+  font-size: clamp(5px, 2.5cqw, 13px);
   padding: 0.5em 1em;
   white-space: nowrap;
 }

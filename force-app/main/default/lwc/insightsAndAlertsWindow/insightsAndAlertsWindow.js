@@ -66,7 +66,8 @@ export default class InsightsAndAlertsWindow extends LightningElement {
         badgeLabel: this.getBadgeLabel(r.Id),
         isExpanded: !!this.expandedMap.get(r.Id),
         isDetailsExpanded: !!this.expandedMap.get(r.Id),
-        chevronClass: this.getChevronClass(false)
+        chevronClass: this.getChevronClass(false),
+        titleClass: this.getTitleClass(false)
       }));
       // preserve expansion where possible
       const newExpanded = new Map();
@@ -121,6 +122,10 @@ export default class InsightsAndAlertsWindow extends LightningElement {
 
   getChevronClass(expanded) {
     return `insight-section-chevron chev ${expanded ? 'rotate' : ''}`.trim();
+  }
+
+  getTitleClass(expanded) {
+    return `slds-text-heading_small insight-title ${expanded ? 'expanded' : 'slds-truncate'}`;
   }
 
   getBadgeClass(context) {
@@ -207,7 +212,8 @@ export default class InsightsAndAlertsWindow extends LightningElement {
 
         return { ...insight,
           isExpanded: newState,
-          chevronClass: this.getChevronClass(newState)        
+          chevronClass: this.getChevronClass(newState),
+          titleClass: this.getTitleClass(newState)
         };
       }
       
