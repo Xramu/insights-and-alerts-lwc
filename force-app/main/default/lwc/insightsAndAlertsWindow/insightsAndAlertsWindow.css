@@ -51,7 +51,10 @@
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
+  gap: 8px;
   width: 100%;
+  container-type: inline-size;
+  container-name: buttonRow;
 }
 
 .insights-list {
@@ -143,16 +146,20 @@
 .custom-button {
   border: none;
   border-radius: 20px;
-  padding: 0.5rem 1rem;
   background-color: var(--all-button-color);
   color: var(--button-text-color) !important;
   cursor: pointer;
   font-weight: 600;
   text-decoration: none;
-  display: inline-block;
   text-align: center;
   vertical-align: middle;
   transition: all var(--hover-transition-speed) var(--hover-transition-timing-function);
+
+  flex: 0 1 auto;
+  min-width: 0;
+  font-size: clamp(10px, 2.5cqw, 13px);
+  padding: 0.5em 1em;
+  white-space: nowrap;
 }
 
 .custom-button:focus {
