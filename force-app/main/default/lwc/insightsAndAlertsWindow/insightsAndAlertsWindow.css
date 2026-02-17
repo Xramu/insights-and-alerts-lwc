@@ -50,6 +50,9 @@
 }
 
 .insight-checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
   margin-left: auto;
 }
 
@@ -101,6 +104,7 @@
 
 .insight-info-section {
   padding-left: var(--common-padding-x2);
+  padding-right: var(--common-padding);
   gap: var(--common-padding);
   display: flex;
   flex-direction: row;
