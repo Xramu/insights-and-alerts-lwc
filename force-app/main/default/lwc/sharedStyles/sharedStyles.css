@@ -10,6 +10,7 @@
 
   --button-border-color: #16325c;
 
+  --common-border-radius: 1rem;
   --border-color: #e4e4e4;
   --border-hover-color: color-mix(in srgb, var(--border-color), black 5%);
 
@@ -33,7 +34,7 @@
 
 .round-border {
   border: 2px solid var(--border-color);
-  border-radius: 1rem;
+  border-radius: var(--common-border-radius);
 }
 
 .chev {

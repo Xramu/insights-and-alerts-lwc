@@ -120,6 +120,7 @@
 .slds-badge {
   border: 0;
   margin-right: var(--common-padding);
+  border-radius: var(--common-border-radius);
 }
 
 /* Context badge colors */
