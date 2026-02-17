@@ -21,9 +21,6 @@ export default class InsightsAndAlertsWindow extends LightningElement {
   // Filter state
   @track selectedFilter = 'All'; // All | Potential | Lead | Account | Opportunity | To-Do
 
-  // Expansion state (Id -> boolean)
-  expandedMap = new Map();
-
   // Color map for contexts
   contextColorMap = {
     Potential: '#b4d1de',
@@ -53,34 +50,37 @@ export default class InsightsAndAlertsWindow extends LightningElement {
     try {
       const records = await getAllInsights();
       // Map to UI-friendly shape with safe defaults and pre-computed properties
-      this.insights = (records || []).map((r) => ({
-        id: r.Id,
-        topic: r.Topic__c || '',
-        context: r.Context__c || '',
-        rationale: r.Rationale__c || '',
-        details: r.Details__c || '',
-        openRecordUrl: r.Open_Record__c || '',
-        completed: !!r.Completed__c,
-        suggestedAction: r.Suggested_Action__c || '',
-        badgeFullClass: `slds-badge ${this.getBadgeClass(r.Context__c)}`,
-        badgeLabel: this.getBadgeLabel(r.Id),
-        isExpanded: !!this.expandedMap.get(r.Id),
-        isDetailsExpanded: !!this.expandedMap.get(r.Id),
-        chevronClass: this.getChevronClass(false),
-        titleClass: this.getTitleClass(false)
-      }));
-      // preserve expansion where possible
-      const newExpanded = new Map();
-      for (const ins of this.insights) {
-        newExpanded.set(ins.id, this.expandedMap.get(ins.id) === true);
-      }
-      this.expandedMap = newExpanded;
+      this.insights = (records || []).map((r) => {
+        // Save the previous state to keep expanded states
+        const previousState = this.getInsightWithId(r.Id);
+        const wasExpanded = previousState?.isExpanded;
+        const hadExtraDetailsExpanded = previousState?.isDetailsExpanded;
+        
+        return ({
+          id: r.Id,
+          topic: r.Topic__c || '',
+          context: r.Context__c || '',
+          rationale: r.Rationale__c || '',
+          details: r.Details__c || '',
+          openRecordUrl: r.Open_Record__c || '',
+          completed: !!r.Completed__c,
+          suggestedAction: r.Suggested_Action__c || '',
+          badgeFullClass: `slds-badge ${this.getBadgeClass(r.Context__c)}`,
+          badgeLabel: this.getBadgeLabel(r.Id),
+          isExpanded: !!wasExpanded,
+          isDetailsExpanded: !!hadExtraDetailsExpanded,
+          chevronClass: this.getChevronClass(!!wasExpanded),
+          titleClass: this.getTitleClass(!!wasExpanded)
+        })
+      });
     } catch (e) {
       this.errorMessage = this.normalizeError(e);
     } finally {
       this.loading = false;
     }
   }
+
+  getInsightWithId = (insightId) => this.insights.find((i) => i.id === insightId);
 
   // UI state getters for template
   get hasData() {
@@ -193,7 +193,7 @@ export default class InsightsAndAlertsWindow extends LightningElement {
 
   // Helper to get badge label (used in template)
   getBadgeLabel(insightId) {
-    const rec = this.insights.find((i) => i.id === insightId);
+    const rec = this.getInsightWithId(insightId);
     const ctx = rec ? rec.context : '';
     return this.contextBadgeLabelMap[ctx] || '';
   }
@@ -205,10 +205,9 @@ export default class InsightsAndAlertsWindow extends LightningElement {
     if (!id) return;
 
     this.insights = this.insights.map((insight) => {
-      // Update map and insight object only if the ID was found
+      // Update insight object only if the ID was found
       if (insight.id === id) {
         const newState = !insight.isExpanded;
-        this.expandedMap.set(id, newState);
 
         return { ...insight,
           isExpanded: newState,
