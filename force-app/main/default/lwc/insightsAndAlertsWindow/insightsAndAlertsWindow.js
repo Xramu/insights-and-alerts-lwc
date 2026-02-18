@@ -1,4 +1,5 @@
 import { LightningElement, track } from 'lwc';
+import { NavigationMixin } from 'lightning/navigation';
 import getAllInsights from '@salesforce/apex/InsightsAlertsService.getAllInsights';
 import updateCompleted from '@salesforce/apex/InsightsAlertsService.updateCompleted';
 
@@ -12,7 +13,7 @@ import updateCompleted from '@salesforce/apex/InsightsAlertsService.updateComple
  * Template rules: no inline expressions/concatenation/function calls in template.
  * All computed labels/styles/classes are getters or fields.
  */
-export default class InsightsAndAlertsWindow extends LightningElement {
+export default class InsightsAndAlertsWindow extends NavigationMixin(LightningElement) {
   // Raw data from server (API shape mapped to UI-friendly shape)
   @track insights = [];
   @track loading = false;
@@ -270,6 +271,20 @@ export default class InsightsAndAlertsWindow extends LightningElement {
 
     // Update class
     this.insights[idx].sectionClass = this.getInsightSectionClass(this.insights[idx].completed);
+  }
+
+  // Navigation from the "View All" button
+  handleNavigationToRecordPage() {
+    this[NavigationMixin.Navigate]({
+      type: 'standard__objectPage',
+      attributes: {
+        objectApiName: 'Insight_and_Alert__c',
+        actionName: 'list'
+      },
+      state: {
+        filterName: 'All'
+      }
+    });
   }
 
   // Child "collapse" event bubble handler (placeholder to meet template wiring)
