@@ -1,7 +1,8 @@
 # Insights & Alerts Lightning Web Component
 
-This repository contains the metadata of a lightning web component that shows generated insights and alerts based on the data inside the current Salesforce organization.
+Disclaimer: This is a demo component for demo purposes only. The base of the code is generated using Agentforce Vibes that I started to build on, code quality may vary!
 
-The project contains the needed custom object metadata and the needed LWC code.
+Custom Lightning Web Component that reads and displays custom insight objects from the Salesforce org. Gives a compact yet expandable view of each insight and allows filtering based on the context.
 
-Currently work in progress.
+![Image of the custom Lightning Web Component.](https://github.com/Xramu/insights-and-alerts-lwc/blob/main/images/insights-and-alerts-component.png)
+Note: All of the data in the picture is mockup data and not based on anything real.
