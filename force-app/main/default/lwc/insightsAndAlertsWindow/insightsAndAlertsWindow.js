@@ -16,6 +16,7 @@ export default class InsightsAndAlertsWindow extends LightningElement {
   // Raw data from server (API shape mapped to UI-friendly shape)
   @track insights = [];
   @track loading = false;
+  @track showCompleted = false;
   @track errorMessage = '';
 
   // Filter state
@@ -70,7 +71,8 @@ export default class InsightsAndAlertsWindow extends LightningElement {
           isExpanded: !!wasExpanded,
           isDetailsExpanded: !!hadExtraDetailsExpanded,
           chevronClass: this.getChevronClass(!!wasExpanded),
-          titleClass: this.getTitleClass(!!wasExpanded)
+          titleClass: this.getTitleClass(!!wasExpanded),
+          sectionClass: this.getInsightSectionClass(!!r.Completed__c)
         })
       });
     } catch (e) {
@@ -88,11 +90,14 @@ export default class InsightsAndAlertsWindow extends LightningElement {
   }
 
   get filteredInsights() {
-    if (this.selectedFilter === 'All') {
-      return this.insights;
+    let result = this.insights;
+
+    // Context based filtering
+    if (this.selectedFilter !== 'All') {
+      result = result.filter((i) => i.context === this.selectedFilter);
     }
-    
-    return this.insights.filter((i) => i.context === this.selectedFilter);
+
+    return result;
   }
 
   // Title bar actions
@@ -119,6 +124,10 @@ export default class InsightsAndAlertsWindow extends LightningElement {
   handleFilterTodo = () => {
     this.selectedFilter = 'To-Do';
   };
+
+  getInsightSectionClass(completed) {
+    return `insight-section round-border ${(completed && !this.showCompleted) ? 'hidden' : ''}`.trim();
+  }
 
   getChevronClass(expanded) {
     return `insight-section-chevron chev ${expanded ? 'rotate' : ''}`.trim();
@@ -220,6 +229,13 @@ export default class InsightsAndAlertsWindow extends LightningElement {
     })
   };
 
+  handleShowCompletedChange(event) {
+    this.showCompleted = !!event?.target?.checked;
+
+    // Update section classes
+    this.insights = this.insights.map((insight) => ({...insight, sectionClass: this.getInsightSectionClass(insight.completed)}))
+  }
+
   // Completed toggle
   async handleCompletedToggle(event) {
     const id = event.currentTarget?.dataset?.id;
@@ -238,9 +254,11 @@ export default class InsightsAndAlertsWindow extends LightningElement {
     } catch (e) {
       // rollback on error
       this.insights[idx].completed = previous;
-      this.insights = [...this.insights];
       this.notify('Update Failed', this.normalizeError(e), 'error');
     }
+
+    // Update class
+    this.insights[idx].sectionClass = this.getInsightSectionClass(this.insights[idx].completed);
   }
 
   // Child "collapse" event bubble handler (placeholder to meet template wiring)

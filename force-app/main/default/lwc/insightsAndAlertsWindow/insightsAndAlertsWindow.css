@@ -1,6 +1,6 @@
-@import 'c/sharedStyles';
 
 :host {
+  @import 'c/sharedStyles';
   --button-text-color: var(--slds-g-color-on-surface-3);
   --selected-button-dark-mix: 20%;
   --all-button-color: #cfcfcf;
@@ -22,6 +22,7 @@
 
 .header-row {
   padding-bottom: var(--common-padding);
+  align-items: center;
 }
 
 .sub-header-row {
@@ -75,12 +76,46 @@
 .insights-list {
   display: flex;
   flex-direction: column;
-  gap: var(--common-padding);
+  gap: 0;
 }
 
 .insight-section {
   background-color: var(--default-background-color, white);
-  transition: var(--hover-transition);
+  transition:
+  var(--hover-transition),
+  margin 0.1s ease;
+  margin-bottom: var(--common-padding);
+}
+
+.insight-section:last-child {
+  margin-bottom: 0;
+}
+
+.insight-section.hidden {
+  animation: squeezeOut 1s forwards;
+  pointer-events: none;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+@keyframes squeezeOut {
+  0% {
+    opacity: 1;
+    max-height: 400px;
+    margin-bottom: var(--common-padding);
+  }
+  50% {
+    opacity: 0;
+    margin-bottom: var(--common-padding);
+  }
+  100% {
+    opacity: 0;
+    max-height: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
 }
 
 .rationale {

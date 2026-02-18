@@ -29,8 +29,14 @@
     </div>
 
     <!-- Description Row -->
-    <div class="slds-text-body_small slds-text-color_weak sub-header-row">
+    <div class="slds-grid slds-grid_align-spread slds-text-body_small slds-text-color_weak sub-header-row">
       <p>Today's Priorities & Insights</p>
+
+      <lightning-input
+        label="Show Completed"
+        type="checkbox"
+        onchange={handleShowCompletedChange}
+      ></lightning-input>
     </div>
 
     <!-- Context Filter Row -->
@@ -83,7 +89,7 @@
     <div class="insights-list">
       <template if:true={hasData}>
         <template for:each={filteredInsights} for:item="ins">
-          <section key={ins.id} class="insight-section round-border">
+          <section key={ins.id} class={ins.sectionClass}>
             <!-- Collapsed header area (always visible) -->
             <div class="expand-toggle" data-id={ins.id} onclick={toggleExpand}>
               <lightning-icon icon-name="utility:chevrondown" size="x-small" class={ins.chevronClass}></lightning-icon>
