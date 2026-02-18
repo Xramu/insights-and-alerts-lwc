@@ -15,12 +15,12 @@ Note: All of the data in the picture is mockup data and not based on anything re
 # Deployment
 
 To deploy to your org, you will need to:
-1. Install VS Code, Salesforce CLI and a version of the JDK (See tzhe link above)
+1. Install VS Code, Salesforce CLI and a version of the JDK (See the link above)
 
 2. Authorize the org through the Command Palette pressing `Cmd + Shift + P` or `Ctrl + Shift + P` and selecting `SFDX: Authorize an Org`
 
-3. Right clicking the `force-app` folder and selecting `SFDX: Deploy This Source to Org`
+3. Right-click the `force-app` folder and selecting `SFDX: Deploy This Source to Org`
 
-4. Creating or importing `Insight and Alert` objects into your org.
+4. Create or import `Insight and Alert` objects into your org.
 
-5. Adding the `Insights And Alerts Window` custom component to a page inside your org.
+5. Add the `Insights And Alerts Window` custom component to a page inside your org.
