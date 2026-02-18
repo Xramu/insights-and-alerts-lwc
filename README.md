@@ -21,6 +21,6 @@ To deploy to your org, you will need to:
 
 3. Right-click the `force-app` folder and selecting `SFDX: Deploy This Source to Org`
 
-4. Create or import `Insight and Alert` objects into your org.
+4. Create or import `Insight_and_Alert__c` objects into your org.
 
 5. Add the `Insights And Alerts Window` custom component to a page inside your org.
