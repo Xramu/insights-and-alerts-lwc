@@ -21,7 +21,7 @@ public with sharing class InsightsAlertsService {
      * @description Get all Insight_and_Alert__c records for display.
      * Fields: Id, Topic__c, Context__c, Rationale__c, Details__c, Open_Record__c, Completed__c, Suggested_Action__c
      */
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled(cacheable=false)
     public static List<Insight_and_Alert__c> getAllInsights() {
         // FLS: check at least read access on key fields; use WITH SECURITY_ENFORCED to enforce at row/field level
         // Note: RTA (Details__c) retrieved safely via SECURITY_ENFORCED.
