@@ -72,7 +72,8 @@ export default class InsightsAndAlertsWindow extends LightningElement {
           isDetailsExpanded: !!hadExtraDetailsExpanded,
           chevronClass: this.getChevronClass(!!wasExpanded),
           titleClass: this.getTitleClass(!!wasExpanded),
-          sectionClass: this.getInsightSectionClass(!!r.Completed__c)
+          sectionClass: this.getInsightSectionClass(!!r.Completed__c),
+          hidden: (r.Completed__c && !this.showCompleted)
         })
       });
     } catch (e) {
@@ -90,14 +91,15 @@ export default class InsightsAndAlertsWindow extends LightningElement {
   }
 
   get filteredInsights() {
-    let result = this.insights;
+    return this.insights.filter((insight) => {
+      // Context based filtering
+      if (this.selectedFilter !== 'All' && insight.context !== this.selectedFilter) {
+        return false;
+      }
 
-    // Context based filtering
-    if (this.selectedFilter !== 'All') {
-      result = result.filter((i) => i.context === this.selectedFilter);
-    }
-
-    return result;
+      // Return true if not hidden
+      return !insight.hidden
+    });
   }
 
   // Title bar actions
@@ -232,14 +234,23 @@ export default class InsightsAndAlertsWindow extends LightningElement {
   handleShowCompletedChange(event) {
     this.showCompleted = !!event?.target?.checked;
 
-    // Update section classes
-    this.insights = this.insights.map((insight) => ({...insight, sectionClass: this.getInsightSectionClass(insight.completed)}))
+    // Update section classes and hidden value
+    this.insights = this.insights.map((insight) => {
+      insight.sectionClass = this.getInsightSectionClass(insight.completed);
+
+      // Only allow disabling hidden state
+      if (this.showCompleted && insight.hidden) {
+        insight.hidden = false;
+      }
+
+      return insight;
+    })
   }
 
   // Completed toggle
   async handleCompletedToggle(event) {
     const id = event.currentTarget?.dataset?.id;
-    const checked = event.target?.checked === true;
+    const checked = !!event.target?.checked;
     if (!id) return;
 
     // optimistic update
@@ -250,7 +261,7 @@ export default class InsightsAndAlertsWindow extends LightningElement {
     this.insights = [...this.insights];
 
     try {
-      await updateCompleted({ updates: [{ id, completed: checked }] });
+      const results = await updateCompleted({ updates: [{ recordId: id, completed: checked }] });
     } catch (e) {
       // rollback on error
       this.insights[idx].completed = previous;

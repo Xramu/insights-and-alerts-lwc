@@ -13,8 +13,8 @@
  */
 public with sharing class InsightsAlertsService {
     public class UpdateRequest {
-        @AuraEnabled public Id id;
-        @AuraEnabled public Boolean completed;
+        @AuraEnabled public Id recordId { get; set; }
+        @AuraEnabled public Boolean completed { get; set; }
     }
 
     /**
@@ -48,18 +48,18 @@ public with sharing class InsightsAlertsService {
     @AuraEnabled
     public static List<Id> updateCompleted(List<UpdateRequest> updates) {
         if (updates == null || updates.isEmpty()) {
-            return new List<Id>();
+            throw new AuraHandledException('Invalid input for updating completion states for insights!');
         }
 
         // Collect Ids and desired states
         Map<Id, Boolean> desired = new Map<Id, Boolean>();
         for (UpdateRequest ur : updates) {
-            if (ur != null && ur.id != null && ur.completed != null) {
-                desired.put(ur.id, ur.completed);
+            if (ur != null && ur.recordId != null && ur.completed != null) {
+                desired.put(ur.recordId, ur.completed);
             }
         }
         if (desired.isEmpty()) {
-            return new List<Id>();
+            throw new AuraHandledException('Failed to find any valid sets of updatable data for insight completion states!');
         }
 
         // Query existing records with FLS + sharing
@@ -73,7 +73,7 @@ public with sharing class InsightsAlertsService {
         // Check field write access for Completed__c
         if (!Schema.sObjectType.Insight_and_Alert__c.fields.Completed__c.isUpdateable()) {
             // If no write access, return empty (alternatively throw an exception)
-            return new List<Id>();
+            throw new AuraHandledException('No permissions to write into Insight_and_Alert__c field Completed__c!');
         }
 
         for (Insight_and_Alert__c rec : toUpdate) {
