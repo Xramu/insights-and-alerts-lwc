@@ -287,6 +287,19 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
     });
   }
 
+  handleLaunchSuggestedAction(event) {
+    const { recordId, actionName } = event?.detail || {};
+
+    if (!recordId || !actionName) {
+      console.error('Launch Suggested Action event details were invalid.');
+      return;
+    }
+
+    console.log(recordId);
+
+    // TODO: Execute suggested action when launching Agent Quick Actions is supported
+  }
+
   // Child "collapse" event bubble handler (placeholder to meet template wiring)
   handleChildCollapse() {
     // The child section's internal Details collapse is bound to parent expansion;

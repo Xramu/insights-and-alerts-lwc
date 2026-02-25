@@ -66,16 +66,17 @@ export default class InsightDetailSection extends LightningElement {
   };
 
   handleSuggestedAction = () => {
-    // Placeholder; consumers can listen for this event to perform actual action logic
-    this.dispatchEvent(
-      new CustomEvent('suggestedaction', {
-        detail: {
-          recordId: this.recordId,
-          context: this.context,
-          label: this.suggestedActionLabel
-        }
-      })
-    );
+    // Pass record id and action to parent
+    const event = new CustomEvent('launchsuggestedaction', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        recordId: this.recordId,
+        actionName: this.suggestedAction
+      }
+    })
+
+    this.dispatchEvent(event);
   };
 
   handleViewRecord = () => {
