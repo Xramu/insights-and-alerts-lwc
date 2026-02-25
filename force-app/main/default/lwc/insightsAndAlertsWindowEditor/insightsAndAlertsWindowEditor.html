@@ -1,0 +1,49 @@
+<template>
+  <div class="slds-p-around_small">
+    <template for:each={contextItems} for:item="contextItem" for:index="index">
+      <div key={contextItem.id} class="slds-box slds-m-bottom_small slds-theme_shade">
+        <lightning-input 
+          label="Filter Label" 
+          value={contextItem.label} 
+          data-id={contextItem.id} 
+          data-field="label" 
+          onchange={handleInputChange}>
+          <lightning-helptext content="Text displayed on the filter button for this context."></lightning-helptext>
+        </lightning-input>
+        
+        <lightning-input 
+          label="Context (Case Sensitive)" 
+          value={contextItem.context} 
+          data-id={contextItem.id} 
+          data-field="context" 
+          onchange={handleInputChange}>
+          <lightning-helptext content="Value of a matching Context__c that this context filter will be showing. IMPORTANT: Text should match 1:1 with the field value of Context__c"></lightning-helptext>
+        </lightning-input>
+
+        <lightning-input 
+          type="color" 
+          label="Color (Hex)"
+          value={contextItem.color} 
+          data-id={contextItem.id} 
+          data-field="color" 
+          onchange={handleInputChange}>
+          <lightning-helptext content="Color used for this context in hex form (E.g. #ffffff)"></lightning-helptext>
+        </lightning-input>
+
+        <lightning-button-icon 
+          icon-name="utility:delete" 
+          variant="error" 
+          class="slds-m-top_x-small"
+          onclick={handleDelete} 
+          data-id={contextItem.id}>
+        </lightning-button-icon>
+      </div>
+    </template>
+
+    <lightning-button 
+      label="Add New Pair" 
+      icon-name="utility:add" 
+      onclick={handleAdd}>
+    </lightning-button>
+  </div>
+</template>
