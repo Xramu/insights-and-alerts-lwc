@@ -29,6 +29,12 @@
         label="Context References"
         description="Comma separated API names of the context types. CASE SENSITIVE! Should match a possible value inside an insight's Context__c field."
         default="Potential,Lead,Account,Opportunity,To-Do" />
+      <property 
+        name="showActionButtons"
+        type="Boolean"
+        label="Show Agentforce Action Buttons"
+        description="Should the Action Buttons (Magic Buttons) be shown when the details of an insight is expanded?"
+        default="false" />
     </targetConfig>
   </targetConfigs>
 </LightningComponentBundle>

@@ -18,6 +18,7 @@ export default class InsightDetailSection extends LightningElement {
   @api suggestedAction = '';
   @api openRecordUrl = '';
   @api expanded = false;
+  @api showActionButton = false;
 
   detailsExpandedInternal = false;
 

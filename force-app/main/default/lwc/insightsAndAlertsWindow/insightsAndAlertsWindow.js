@@ -26,6 +26,7 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
   @api contextLabels = '';
   @api contextColors = '';
   @api contextReferences = '';
+  @api showActionButtons = false;
 
   filterButtonsData = [] 
   
