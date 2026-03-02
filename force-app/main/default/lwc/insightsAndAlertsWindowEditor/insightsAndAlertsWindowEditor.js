@@ -15,25 +15,25 @@ export default class InsightsAndAlertsWindowEditor extends LightningElement {
       id: 1,
       label: 'Leads',
       context: 'Lead',
-      color: '#b4d1de'
+      color: '#04A59A'
     },
     {
       id: 2,
       label: 'Accounts',
       context: 'Account',
-      color: '#b4d1de'
+      color: '#5867E8'
     },
     {
       id: 3,
       label: 'Opportunities',
       context: 'Opportunity',
-      color: '#b4d1de'
+      color: '#FF5C2E'
     },
     {
       id: 4,
       label: 'To-Dos',
       context: 'To-Do',
-      color: '#b4d1de'
+      color: '#3BA755'
     },
   ]
 
