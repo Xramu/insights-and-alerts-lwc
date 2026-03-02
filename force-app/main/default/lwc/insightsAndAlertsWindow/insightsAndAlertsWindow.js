@@ -1,4 +1,4 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, api } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import getAllInsights from '@salesforce/apex/InsightsAlertsService.getAllInsights';
 import updateCompleted from '@salesforce/apex/InsightsAlertsService.updateCompleted';
@@ -22,6 +22,10 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
 
   // Filter state
   @track selectedFilter = 'All'; // All | Potential | Lead | Account | Opportunity | To-Do
+
+  @api contextLabels = '';
+  @api contextColors = '';
+  @api contextReferences = '';
 
   // Color map for contexts
   contextColorMap = {

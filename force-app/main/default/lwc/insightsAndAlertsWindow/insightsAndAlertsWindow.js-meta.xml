@@ -9,4 +9,26 @@
     <target>lightning__HomePage</target>
     <target>lightning__FlowScreen</target>
   </targets>
+  <targetConfigs>
+    <targetConfig targets="lightning__AppPage,lightning__RecordPage,lightning__HomePage,lightning__FlowScreen">
+      <property
+        name="contextLabels"
+        type="String"
+        label="Context Lables"
+        description="Comma separated texts to be shown inside the filter buttons for each context."
+        default="Potentials,Leads,Accounts,Opportunities,To-Dos" />
+      <property
+        name="contextColors"
+        type="String"
+        label="Context Colors"
+        description="Comma separated hex colors of the context types. This will color the filter button and the badges of each insight."
+        default="#B4D1DE,#04A59A,#5867E8,#FF5C2E,#3BA755" />
+      <property 
+        name="contextReferences"
+        type="String"
+        label="Context References"
+        description="Comma separated API names of the context types. CASE SENSITIVE! Should match a possible value inside an insight's Context__c field."
+        default="Potential,Lead,Account,Opportunity,To-Do" />
+    </targetConfig>
+  </targetConfigs>
 </LightningComponentBundle>
