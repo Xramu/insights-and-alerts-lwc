@@ -12,6 +12,7 @@ export default class InsightDetailSection extends LightningElement {
   @api recordId;
   @api topic = '';
   @api context = '';
+  @api contextColor = '';
   @api details = '';
   @api rationale = '';
   @api suggestedAction = '';

@@ -27,6 +27,53 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
   @api contextColors = '';
   @api contextReferences = '';
 
+  filterButtonsData = [] 
+  
+  updateFilterButtonsData() {
+    // Split and trim input strings
+    const labels = this.splitAndTrimInput(this.contextLabels);
+    const colors = this.splitAndTrimInput(this.contextColors);
+    const references = this.splitAndTrimInput(this.contextReferences);
+
+    const buttonData = labels.map((label, index) => {
+      // Assign color and reference with fallback color and popping an error if array lenghts mismatch
+      const color = colors[index];
+      const reference = references[index];
+
+      // Color error and fallback
+      if (!color) {
+        //TODO: Use a toast to inform the admin
+        console.error('The amount of context colors is shorter than the context labels!');
+        color = '#ffffff';
+      }
+
+      // Reference error and default to null
+      if (!reference) {
+        // TODO: Use a toast here too
+        console.error('The amount of context references is shorter than the context labels!');
+        return null;
+      }
+
+      // Return data obj
+      return {
+        id: `context-${index}`,
+        label: label,
+        color: color,
+        reference: reference,
+        style: `--context-color: ${color}`,
+        class: `custom-button context-button ${this.selectedFilter === reference ? 'selected' : ''}`.trim(),
+        onClick: () => this.handleFilterClick(reference)
+      }
+    });
+
+    // Map can return null for missing references, filter out and return non-nulls
+    this.filterButtonsData = buttonData.filter(item => item !== null);
+  }
+
+  splitAndTrimInput(inputString) {
+    return inputString ? inputString.split(',').map((str) => str.trim()) : [];
+  }
+
   // Color map for contexts
   contextColorMap = {
     Potential: '#b4d1de',
@@ -47,6 +94,7 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
 
   connectedCallback() {
     console.log('Refreshed');
+    this.updateFilterButtonsData();
     this.loadData();
   }
 
@@ -71,14 +119,15 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
           openRecordUrl: r.Open_Record__c || '',
           completed: !!r.Completed__c,
           suggestedAction: r.Suggested_Action__c || '',
-          badgeFullClass: `slds-badge ${this.getBadgeClass(r.Context__c)}`,
+          style: `--context-color: ${this.filterButtonsData.find(data => data.reference === r.Context__c)?.color}`,
+          badgeFullClass: `slds-badge`,
           badgeLabel: this.getBadgeLabel(r.Id),
           isExpanded: !!wasExpanded,
           isDetailsExpanded: !!hadExtraDetailsExpanded,
           chevronClass: this.getChevronClass(!!wasExpanded),
           titleClass: this.getTitleClass(!!wasExpanded),
           sectionClass: this.getInsightSectionClass(!!r.Completed__c),
-          hidden: (r.Completed__c && !this.showCompleted)
+          hidden: (r.Completed__c && !this.showCompleted),
         })
       });
     } catch (e) {
@@ -102,8 +151,13 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
         return false;
       }
 
-      // Return true if not hidden
-      return !insight.hidden
+      // Return false if hidden
+      if (insight.hidden) {
+        return false;
+      }
+
+      // Return true only if the component is set to display this context
+      return this.filterButtonsData.some(data => data.reference === insight.context);
     });
   }
 
@@ -112,24 +166,29 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
     this.loadData();
   };
 
+  handleFilterClick(context) {
+    this.selectedFilter = context;
+    this.updateFilterButtonsData();
+  }
+
   // Filter button handlers
   handleFilterAll = () => {
-    this.selectedFilter = 'All';
+    this.handleFilterClick('All');
   };
   handleFilterPotential = () => {
-    this.selectedFilter = 'Potential';
+    this.handleFilterClick('Potential');
   };
   handleFilterLead = () => {
-    this.selectedFilter = 'Lead';
+    this.handleFilterClick('Lead');
   };
   handleFilterAccount = () => {
-    this.selectedFilter = 'Account';
+    this.handleFilterClick('Account');
   };
   handleFilterOpportunity = () => {
-    this.selectedFilter = 'Opportunity';
+    this.handleFilterClick('Opportunity');
   };
   handleFilterTodo = () => {
-    this.selectedFilter = 'To-Do';
+    this.handleFilterClick('To-Do');
   };
 
   getInsightSectionClass(completed) {

@@ -9,7 +9,7 @@ export default class InsightsAndAlertsWindowEditor extends LightningElement {
       id: 0,
       label: 'Potentials',
       context: 'Potential',
-      color: '#b4d1de'
+      color: '#B4D1DE'
     },
     {
       id: 1,
@@ -27,7 +27,7 @@ export default class InsightsAndAlertsWindowEditor extends LightningElement {
       id: 3,
       label: 'Opportunities',
       context: 'Opportunity',
-      color: '#FF5C2E'
+      color: '#5867E8'
     },
     {
       id: 4,

@@ -53,48 +53,25 @@
       >
         All
       </button>
-      <button
-        type="button"
-        class={potentialButtonClass}
-        onclick={handleFilterPotential}
-      >
-        Potentials
-      </button>
-      <button
-        type="button"
-        class={leadButtonClass}
-        onclick={handleFilterLead}
-      >
-        Leads
-      </button>
-      <button
-        type="button"
-        class={accountButtonClass}
-        onclick={handleFilterAccount}
-      >
-        Accounts
-      </button>
-      <button
-        type="button"
-        class={opportunityButtonClass}
-        onclick={handleFilterOpportunity}
-      >
-        Opportunities
-      </button>
-      <button
-        type="button"
-        class={todoButtonClass}
-        onclick={handleFilterTodo}
-      >
-        To-Do
-      </button>
+
+      <template for:each={filterButtonsData} for:item="filterButtonData">
+        <button
+          key={filterButtonData.id}
+          type="button"
+          style={filterButtonData.style}
+          class={filterButtonData.class}
+          onclick={filterButtonData.onClick}
+        >
+          {filterButtonData.label}
+        </button>
+      </template>
     </div>
 
     <!-- Insights List -->
     <div class="insights-list">
       <template if:true={hasData}>
         <template for:each={filteredInsights} for:item="ins">
-          <section key={ins.id} class={ins.sectionClass}>
+          <section key={ins.id} style={ins.style} class={ins.sectionClass}>
             <!-- Collapsed header area (always visible) -->
             <div class="expand-toggle" data-id={ins.id} onclick={toggleExpand}>
               <lightning-icon icon-name="utility:chevrondown" size="x-small" class={ins.chevronClass}></lightning-icon>

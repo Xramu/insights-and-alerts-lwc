@@ -161,6 +161,8 @@
   border: 0;
   margin-right: var(--common-padding);
   border-radius: var(--common-border-radius);
+  background: var(--context-color);
+  color: var(--button-border-color);
 }
 
 /* Context badge colors */
@@ -224,6 +226,14 @@
 
 .custom-button:active {
   transform: scale(0.95);
+}
+
+.context-button {
+  background-color: var(--context-color);
+}
+
+.context-button.selected {
+  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--context-color), var(--button-shadow-dark-mix-color) var(--button-shadow-mix-percentage));
 }
 
 .custom-button.all.selected {
