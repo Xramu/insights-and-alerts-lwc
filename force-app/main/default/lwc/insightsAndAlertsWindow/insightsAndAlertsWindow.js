@@ -118,6 +118,7 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
         const previousState = this.getInsightWithId(r.Id);
         const wasExpanded = previousState?.isExpanded;
         const hadExtraDetailsExpanded = previousState?.isDetailsExpanded;
+        const wasHidden = previousState?.hidden;
         
         return ({
           id: r.Id,
@@ -135,7 +136,7 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
           chevronClass: this.getChevronClass(!!wasExpanded),
           titleClass: this.getTitleClass(!!wasExpanded),
           sectionClass: this.getInsightSectionClass(!!r.Completed__c),
-          hidden: (r.Completed__c && !this.showCompleted),
+          hidden: ((wasHidden || r.Completed__c) && !this.showCompleted),
         })
       });
     } catch (e) {
@@ -149,7 +150,7 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
 
   // UI state getters for template
   get hasData() {
-    return Array.isArray(this.insights) && this.insights.length > 0;
+    return this.filteredInsights.length > 0;
   }
 
   get filteredInsights() {
@@ -169,12 +170,20 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
     });
   }
 
+  updateInsightsHiddenStates() {
+    this.insights = this.insights.map((insight) => {
+      return {...insight, hidden: insight.completed && !this.showCompleted};
+    });
+  }
+
   // Title bar actions
   handleRefresh = () => {
+    this.updateInsightsHiddenStates();
     this.loadData();
   };
 
   handleFilterClick(context) {
+    this.updateInsightsHiddenStates();
     this.selectedFilter = context;
     this.updateFilterButtonsData();
   }
