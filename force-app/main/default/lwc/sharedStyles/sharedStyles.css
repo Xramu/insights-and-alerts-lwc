@@ -1,14 +1,5 @@
 :host {
-  --potential-color: #b4d1de;
-  --lead-color: #04A59A;
-  --account-color: #5867E8;
-  --opportunity-color: #FF5C2E;
-  --todo-color: #3BA755;
-  --check-color: #54bd5b;
-
   --common-gray: #f3f3f3;
-
-  --button-border-color: #16325c;
 
   --common-border-radius: 1rem;
   --border-color: #e4e4e4;

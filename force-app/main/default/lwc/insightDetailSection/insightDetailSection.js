@@ -76,7 +76,7 @@ export default class InsightDetailSection extends LightningElement {
         recordId: this.recordId,
         actionName: this.suggestedAction
       }
-    })
+    });
 
     this.dispatchEvent(event);
   };

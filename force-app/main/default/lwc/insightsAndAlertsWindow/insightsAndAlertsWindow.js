@@ -28,15 +28,36 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
   @api contextReferences = '';
   @api showActionButtons = false;
 
+  inputContexts = [];
   filterButtonsData = [] 
   
+  // Called whenever the input contexts get parsed or the styling of the filter buttons need a change
   updateFilterButtonsData() {
-    // Split and trim input strings
+    if (!this.inputContexts) {
+      return;
+    }
+
+    // Get label, color and reference from a pre-parsed input array
+    this.filterButtonsData = this.inputContexts.map(({label, color, reference}, index) => {
+      return {
+        id: `context-${index}`,
+        label: label,
+        color: color,
+        reference: reference,
+        style: `--context-color: ${color}`,
+        class: `custom-button ${this.selectedFilter === reference ? 'selected' : ''}`.trim(),
+        onClick: () => this.handleFilterClick(reference)
+      };
+    });
+  }
+
+  // Since inputs won't change in real time, this is called on connected callback
+  splitAndTrimInputs() {
     const labels = this.splitAndTrimInput(this.contextLabels);
     const colors = this.splitAndTrimInput(this.contextColors);
     const references = this.splitAndTrimInput(this.contextReferences);
 
-    const buttonData = labels.map((label, index) => {
+    const contextObjs = labels.map((label, index) => {
       // Assign color and reference with fallback color and popping an error if array lenghts mismatch
       const color = colors[index];
       const reference = references[index];
@@ -55,35 +76,22 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
         return null;
       }
 
-      // Return data obj
       return {
-        id: `context-${index}`,
         label: label,
         color: color,
-        reference: reference,
-        style: `--context-color: ${color}`,
-        class: `custom-button context-button ${this.selectedFilter === reference ? 'selected' : ''}`.trim(),
-        onClick: () => this.handleFilterClick(reference)
-      }
+        reference: reference
+      };
     });
 
-    // Map can return null for missing references, filter out and return non-nulls
-    this.filterButtonsData = buttonData.filter(item => item !== null);
+    // Set parsed context data and update filter buttons to reflect them
+    this.inputContexts = contextObjs.filter(item => item !== null);
+    this.updateFilterButtonsData();
   }
 
   splitAndTrimInput(inputString) {
     return inputString ? inputString.split(',').map((str) => str.trim()) : [];
   }
-
-  // Color map for contexts
-  contextColorMap = {
-    Potential: '#b4d1de',
-    Lead: '#1894c9',
-    Account: '#97c39b',
-    Opportunity: '#c9b4de',
-    'To-Do': '#efe183'
-  };
-
+  
   // Badge label map for contexts (pluralization per spec)
   contextBadgeLabelMap = {
     Potential: 'Potentials',
@@ -95,7 +103,7 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
 
   connectedCallback() {
     console.log('Refreshed');
-    this.updateFilterButtonsData();
+    this.splitAndTrimInputs();
     this.loadData();
   }
 
@@ -121,7 +129,6 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
           completed: !!r.Completed__c,
           suggestedAction: r.Suggested_Action__c || '',
           style: `--context-color: ${this.filterButtonsData.find(data => data.reference === r.Context__c)?.color}`,
-          badgeFullClass: `slds-badge`,
           badgeLabel: this.getBadgeLabel(r.Id),
           isExpanded: !!wasExpanded,
           isDetailsExpanded: !!hadExtraDetailsExpanded,
@@ -176,21 +183,6 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
   handleFilterAll = () => {
     this.handleFilterClick('All');
   };
-  handleFilterPotential = () => {
-    this.handleFilterClick('Potential');
-  };
-  handleFilterLead = () => {
-    this.handleFilterClick('Lead');
-  };
-  handleFilterAccount = () => {
-    this.handleFilterClick('Account');
-  };
-  handleFilterOpportunity = () => {
-    this.handleFilterClick('Opportunity');
-  };
-  handleFilterTodo = () => {
-    this.handleFilterClick('To-Do');
-  };
 
   getInsightSectionClass(completed) {
     return `insight-section round-border ${(completed && !this.showCompleted) ? 'hidden' : ''}`.trim();
@@ -204,63 +196,9 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
     return `slds-text-heading_small insight-title ${expanded ? 'expanded' : 'slds-truncate'}`;
   }
 
-  getBadgeClass(context) {
-    const classLookup = {
-      'Potential': 'badge-potential',
-      'Lead': 'badge-lead',
-      'Account': 'badge-account',
-      'Opportunity': 'badge-opportunity',
-      'To-Do':'badge-todo'
-    }
-
-    return classLookup[context] || '';
-  }
-
-  regularButtonStyle = 'custom-button';
-  selectedButtonStyle = `${this.regularButtonStyle} selected`;
-
-  getFilterButtonClasses(buttonType, selectedStyle, additionalStyling) {
-    const baseClass = this.selectedFilter === buttonType ? selectedStyle : this.regularButtonStyle;
-    // Add context-specific class using lookup table
-    const contextClassLookup = {
-      'Potential': 'potential',
-      'Lead': 'lead',
-      'Account': 'account',
-      'Opportunity': 'opportunity',
-      'To-Do': 'todo',
-      'All': 'all'
-    };
-    const contextClass = contextClassLookup[buttonType] || '';
-    return `${baseClass} ${contextClass} ${additionalStyling}`.trim();
-  }
-
-  getBadgeSelectedClass() {
-    return this.getFilterButtonClasses('All', this.selectedButtonStyle, '');
-  }
-
   // Predefined button classes for each context
   get allButtonClass() {
-    return this.getFilterButtonClasses('All', this.selectedButtonStyle, '');
-  }
-
-  get potentialButtonClass() {
-    return this.getFilterButtonClasses('Potential', this.selectedButtonStyle, '');
-  }
-
-  get leadButtonClass() {
-    return this.getFilterButtonClasses('Lead', this.selectedButtonStyle, '');
-  }
-
-  get accountButtonClass() {
-    return this.getFilterButtonClasses('Account', this.selectedButtonStyle, '');
-  }
-
-  get opportunityButtonClass() {
-    return this.getFilterButtonClasses('Opportunity', this.selectedButtonStyle, '');
-  }
-
-  get todoButtonClass() {
-    return this.getFilterButtonClasses('To-Do', this.selectedButtonStyle, '');
+    return `custom-button ${this.selectedFilter === 'All' ? 'selected' : ''}`.trim();
   }
 
   get checkClass() {
@@ -362,12 +300,6 @@ export default class InsightsAndAlertsWindow extends NavigationMixin(LightningEl
     console.log(recordId);
 
     // TODO: Execute suggested action when launching Agent Quick Actions is supported
-  }
-
-  // Child "collapse" event bubble handler (placeholder to meet template wiring)
-  handleChildCollapse() {
-    // The child section's internal Details collapse is bound to parent expansion;
-    // no extra action needed. Method provided to comply with no-inline-calls rule.
   }
 
   // Toast helper

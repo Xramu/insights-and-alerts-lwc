@@ -48,6 +48,7 @@
     <div class="filter-buttons-row">
       <button
         type="button"
+        style="--context-color: var(--all-button-color);"
         class={allButtonClass}
         onclick={handleFilterAll}
       >
@@ -80,13 +81,8 @@
                   {ins.topic}
                 </div>
                 <!-- Context Badge -->
-                <span class={ins.badgeFullClass}>{ins.context}</span>
+                <span class="slds-badge">{ins.context}</span>
                 <!-- Completed Checkbox -->
-                
-                <!-- Icon Checkmark
-                <lightning-icon icon-name="utility:check" variant="inverse" size="small" class={checkClass}></lightning-icon>
-                -->
-                
                 <lightning-input
                   class="insight-checkbox"
                   type="checkbox"
@@ -111,7 +107,6 @@
                   suggested-action={ins.suggestedAction}
                   open-record-url={ins.openRecordUrl}
                   expanded={ins.isDetailsExpanded}
-                  oncollapse={handleChildCollapse}
                   onlaunchsuggestedaction={handleLaunchSuggestedAction}
                   show-action-button={showActionButtons}
                 ></c-insight-detail-section>

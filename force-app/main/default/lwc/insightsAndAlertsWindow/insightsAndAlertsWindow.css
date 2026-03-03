@@ -152,55 +152,19 @@
   padding: var(--common-padding);
 }
 
-.right-controls {
-  min-width: 14rem;
-  justify-content: flex-end;
-}
-
 .slds-badge {
   border: 0;
   margin-right: var(--common-padding);
   border-radius: var(--common-border-radius);
   background: var(--context-color);
-  color: var(--button-border-color);
-}
-
-/* Context badge colors */
-.badge-potential {
-  background: var(--potential-color);
-  color: var(--button-border-color);
-}
-
-.badge-lead {
-  background: var(--lead-color);
-  color: var(--button-border-color);
-}
-
-.badge-account {
-  background: var(--account-color);
-  color: var(--button-border-color);
-}
-
-.badge-opportunity {
-  background: var(--opportunity-color);
-  color: var(--button-border-color);
-}
-
-.badge-todo {
-  background: var(--todo-color);
-  color: var(--button-border-color);
-}
-
-.badge-all-selected {
-  background: var(--all-button-color);
-  color: var(--all-button-border-color);
+  color: var(--button-text-color);
 }
 
 /* Custom button styles */
 .custom-button {
   border: none;
   border-radius: 20px;
-  background-color: var(--all-button-color);
+  background-color: var(--context-color);
   color: var(--button-text-color) !important;
   cursor: pointer;
   font-weight: 600;
@@ -228,70 +192,6 @@
   transform: scale(0.95);
 }
 
-.context-button {
-  background-color: var(--context-color);
-}
-
-.context-button.selected {
+.custom-button.selected {
   box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--context-color), var(--button-shadow-dark-mix-color) var(--button-shadow-mix-percentage));
-}
-
-.custom-button.all.selected {
-  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--all-button-color), var(--button-shadow-dark-mix-color) var(--button-shadow-mix-percentage));
-}
-
-/* Context-specific button colors */
-.custom-button.potential {
-  background-color: var(--potential-color);
-}
-
-.custom-button.potential.selected {
-  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--potential-color), var(--button-shadow-dark-mix-color) var(--button-shadow-mix-percentage));
-}
-
-.custom-button.lead {
-  background-color: var(--lead-color);
-}
-
-.custom-button.lead.selected {
-  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--lead-color), var(--button-shadow-dark-mix-color) var(--button-shadow-mix-percentage));
-}
-
-.custom-button.account {
-  background-color: var(--account-color);
-}
-
-.custom-button.account.selected {
-  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--account-color), var(--button-shadow-dark-mix-color) var(--button-shadow-mix-percentage));
-}
-
-.custom-button.opportunity {
-  background-color: var(--opportunity-color);
-}
-
-.custom-button.opportunity.selected {
-  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--opportunity-color), var(--button-shadow-dark-mix-color) var(--button-shadow-mix-percentage));
-}
-
-.custom-button.todo {
-  background-color: var(--todo-color);
-}
-
-.custom-button.todo.selected {
-  box-shadow: var(--button-shadow-size) color-mix(in srgb, var(--todo-color), var(--button-shadow-dark-mix-color) var(--button-shadow-mix-percentage));
-}
-
-.check {
-  background-color: var(--check-color, green);
-  padding: 0.5rem;
-  transition: all var(--hover-transition-speed) var(--hover-transition-timing-function);
-}
-
-.check:hover {
-  transform: scale(1.1);
-}
-
-.check:active {
-  transform: scale(0.95);
-  opacity: 0.8;
 }
