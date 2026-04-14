@@ -4,5 +4,27 @@
         <members>Insight_and_Alert__c</members>
         <name>CustomObject</name>
     </types>
+    <types>
+        <members>Insight_and_Alert__c-Insight and Alert Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
+        <members>Insights_And_Alerts</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <members>Insights_And_Alerts_UtilityBar</members>
+        <members>Alerts_And_Insights_Dev</members>
+        <name>FlexiPage</name>
+    </types>
+    <types>
+        <members>Insight_and_Alert__c</members>
+        <members>Alerts_And_Insights_Dev</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Alerts_And_Insights_Permissions</members>
+        <name>PermissionSet</name>
+    </types>
     <version>65.0</version>
 </Package>
