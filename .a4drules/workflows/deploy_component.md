@@ -15,7 +15,33 @@ If the deployment was unsuccessful, never start editing the code under any circu
 
 ## Instructions
 
-1. **Get the username**
+1. **Confirm that the User has Enabled Einstein AI and Agentforce**
+
+    Before going forward in the workflow process, ask the user if they have enabled Einstein AI and Agentforce inside their Salesforce organization.
+
+    Notify the user that the deployment requires having the Einstein Generative AI and Agentforce to be enabled inside their organization.
+
+    Give the user the ability to answer "I have enabled Einstein AI and Agentforce" or "How do I enable Einstein AI and Agentforce?"
+
+    If the user selects the first option, continue to the step number 2.
+
+    If the user selects the second option, give them this message:
+
+        Open your organization's Setup menu and search and click "Agentforce & Gen AI".
+
+        Click "Go to Einstein Setup" and enabled "Turn on Einstein".
+
+        Navigate back to "Agentforce & Gen AI" and click "Go to Agent Studio".
+
+        Enable Agentforce from the top right toggle on the "Agentforce Agents" section.
+    
+    After sending the message, give the user ability to answer "I have enabled Einstein AI and Agentforce" or "Cancel Deployment"
+
+    If the user selected the first option, move to the step number 2.
+
+    If the user selected the second option, stop the workflow to complete the task.
+
+2. **Get the Username**
 
     To get the username of the current user, use the Salesforce DX tool:
 
@@ -25,7 +51,7 @@ If the deployment was unsuccessful, never start editing the code under any circu
 
     This username will be used for the deployment of the metadata and the needed permissions.
 
-2. **Deploy the Metadata of the Global Value Sets**
+3. **Deploy the Metadata of the Global Value Sets**
 
     Deploy the metadata of the project into the org connected to the username.
 
@@ -39,7 +65,7 @@ If the deployment was unsuccessful, never start editing the code under any circu
     Do not proceed until deployment of the metadata is complete
 
 
-3. **Assign Permission Set to the User**
+4. **Assign Permission Set to the User**
 
     Assign the permission set named `Alerts_And_Insights_Permissions` to the current user by using the tool:
 
@@ -50,10 +76,10 @@ If the deployment was unsuccessful, never start editing the code under any circu
     If the assignment was unsuccessful, run neccessary commands or ask the user for any missing information.
     If the assignment is still not working after a few tries, tell the user that they can follow the manual instructions in the GitHub project to manually assign the needed permission for their user.
 
-4. **Notify the User**
+5. **Notify the User**
 
     Notify the user that the project was successfully deployed if each command eventually succeeded.
 
-    Tell the user that the Alerts And Insights component can be found from the App Launcher inside their connected Salesforce org.
+    Tell the user that the Alerts And Insights component can be found from the App Launcher by searching for "Insights And Alerts" inside their connected Salesforce org.
 
     If there is a tool for opening the default org, run it to open the connected org for the user.
