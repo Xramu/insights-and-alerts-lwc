@@ -15,6 +15,7 @@
     <types>
         <members>Insights_And_Alerts_UtilityBar</members>
         <members>Alerts_And_Insights_Dev</members>
+        <members>Insight_and_Alert_Record_Page</members>
         <name>FlexiPage</name>
     </types>
     <types>
