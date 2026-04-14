@@ -53,6 +53,10 @@
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <tabSettings>
+        <tab>Alerts_And_Insights_Dev</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
         <tab>Insight_and_Alert__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
