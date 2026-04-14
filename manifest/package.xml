@@ -5,6 +5,12 @@
         <name>CustomObject</name>
     </types>
     <types>
+        <members>Insight_and_Alert__c.Generate_Follow_up</members>
+        <members>Insight_and_Alert__c.Ask_Agentforce</members>
+        <members>Insight_and_Alert__c.Suggested_Action</members>
+        <name>QuickAction</name>
+    </types>
+    <types>
         <members>Insight_and_Alert__c-Insight and Alert Layout</members>
         <name>Layout</name>
     </types>

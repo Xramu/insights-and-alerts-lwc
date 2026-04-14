@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Ask Agentforce</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <quickActionParameters>
+        <name>User Utterance</name>
+        <type>Input</type>
+        <value>Read the &quot;Suggested Action&quot; field and execute that</value>
+    </quickActionParameters>
+    <type>Copilot</type>
+</QuickAction>
