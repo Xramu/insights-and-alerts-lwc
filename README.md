@@ -131,7 +131,7 @@ Please be aware of the inconsistent naming between the object, permission set an
 
 ![Preview of the App Launcher highlighting the Alert and Insights list view.](images/custom_object_listview_preview.png)
 
-Create a new Insight and Alert record by pressing the `New` from the top right corner.
+Create a new Insight and Alert record by pressing the `New` button from the top right corner.
 
 Specify the details and context of the insight.
 
@@ -143,7 +143,7 @@ The `Insights and Alerts Window` Lightning Web Component takes in an input strin
 
 ![Preview of what the component looks like inside edit page view with its inputs shown.](images/component_inputs_preview.png)
 
-The example inputs on the image above results in the 3 filter buttons being created:
+The example inputs on the image above result in the 3 filter buttons being created:
 
 | Context Label | Context Color | Context Reference |
 | --- | --- | --- |
@@ -151,7 +151,7 @@ The example inputs on the image above results in the 3 filter buttons being crea
 | Potentials | #cf48cb | Potential |
 | Leads | #48c8cf | Lead |
 
-Note how the first values of each text input gets grouped into a single filter button, the second values into another button etc.
+Note how the first values of each text input gets grouped into a single filter button, the second values into another button, etc.
 
 ### Inputs Explained
 
