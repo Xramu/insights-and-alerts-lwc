@@ -15,6 +15,7 @@ Note: All of the data in the picture is mockup data and not based on anything re
 - [Deploy with Agentforce Vibes](#deploy-with-agentforce-vibes)
 - [Manual Deployment](#manual-deployment)
 - [View the Insights and Alerts Component](#view-the-insights-and-alerts-component)
+- [Creating Insights and Alerts](#creating-insights-and-alerts)
 
 ## VS Code for Salesforce DX Setup
 
@@ -117,3 +118,50 @@ Open the App Launcher from the top left and search for `Insights And Alerts`
 ![Preview of the app launcher highlighting the Insights And Alerts application.](images/app_launcher_preview.png)
 
 Click the Insights And Alerts application to see the demo page with 3 different setups of the component.
+
+![Preview of the deployed component.](images/deployed_component_preview.png)
+
+Note that the component is empty since there are no Insight and Alert records created yet.
+
+## Creating Insights and Alerts
+
+To create records that will be shown inside the component, search for `Insight and Alerts` in the App Launcher's Items section.
+
+Please be aware of the inconsistent naming between the object, permission set and app.
+
+![Preview of the App Launcher highlighting the Alert and Insights list view.](images/custom_object_listview_preview.png)
+
+Create a new Insight and Alert record by pressing the `New` from the top right corner.
+
+Specify the details and context of the insight.
+
+![Preview of the record creation view for a single Alert and Insight record.](images/custom_object_record_preview.png)
+
+## Context Filtering Guide
+
+The `Insights and Alerts Window` Lightning Web Component takes in an input string that defines the scope of insights to show inside it.
+
+![Preview of what the component looks like inside edit page view with its inputs shown.](images/component_inputs_preview.png)
+
+The example inputs on the image above results in the 3 filter buttons being created:
+
+| Context Label | Context Color | Context Reference |
+| --- | --- | --- |
+| Accounts | #cf6e48 | Account |
+| Potentials | #cf48cb | Potential |
+| Leads | #48c8cf | Lead |
+
+Note how the first values of each text input gets grouped into a single filter button, the second values into another button etc.
+
+### Inputs Explained
+
+As shown on the image, the component takes in 4 inputs. The text inputs take comma separated values to define the aspects of each filter button.
+
+**NOTE:** If the number of values do not match between the 3 text inputs, filter buttons are only created for the sets that have all the values defined.
+
+| Input Name | Description |
+| --- | --- |
+| Context Labels | Label of each context filter button shown. |
+| Context Colors | Hexadecimal color of each filter button. |
+| Context References | The context type that each filter button will show. These values are **CASE SENSITIVE** and will define what types of insights will be shown in the component. The `All` button will show the insights of all the given types. |
+| Show Agentforce Action Buttons | Enables the suggested action dummy buttons for the expanded details views of each insight. |
